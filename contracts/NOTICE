@@ -1,0 +1,39 @@
+NOTICE
+======
+
+Riz.Fun BSC launcher — Foundry deploy path for a Pons V2 fork.
+
+Portions of this software are derived from [ponsdotdev/ponsfamily](https://github.com/ponsdotdev/ponsfamily),
+Copyright (c) Pons contributors, licensed under the MIT License.
+
+Upstream pin (clone): debbc21fb27761245356fe9b61a9276437147a1c
+
+Keep SPDX-License-Identifier: MIT headers on Solidity sources. Do not strip
+copyright notices from forked files under ../pons-fork/.
+
+HookMiner (script/lib/HookMiner.sol) is adapted from Uniswap v4-periphery
+test/shared/HookMiner.sol (MIT).
+
+PonsV2FeeEscrow.sol in this tree is a local shim implementing IPonsV2FeeEscrow:
+upstream ships the interface only at the pinned commit (no FeeEscrow.sol in
+contractsV2/src/v2/).
+
+MIT License text (Pons / applicable MIT portions):
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

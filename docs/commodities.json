@@ -1,0 +1,38 @@
+{
+  "chainId": 56,
+  "chain": "bsc",
+  "updatedAt": "2026-09-11",
+  "notes": "Initial enabled quotes for the BSC commodities launcher (Riz.Fun). Native BNB uses Uniswap v4 / Pons sentinel address(0). Approval on the factory is separate from this registry. Not an endorsement of issuers. No custody of physical metal.",
+  "quotes": [
+    {
+      "symbol": "BNB",
+      "name": "BNB (native)",
+      "mint": "0x0000000000000000000000000000000000000000",
+      "decimals": 18,
+      "kind": "native",
+      "enabled": true,
+      "minLiquidityUsd": 0,
+      "notes": "Native gas token; Pons pairToken address(0). Day-1 native quote equivalent to ETH on Robinhood Pons."
+    },
+    {
+      "symbol": "XAUt",
+      "name": "Tether Gold",
+      "mint": "0x21cAef8A43163Eea865baeE23b9C2E327696A3bf",
+      "decimals": 6,
+      "kind": "tokenized_gold",
+      "enabled": true,
+      "minLiquidityUsd": 50000,
+      "notes": "Tether Gold on BNB Chain. 6 decimals. At Pons MIN_PAIR_TOKEN_DECIMALS floor."
+    },
+    {
+      "symbol": "PAXG",
+      "name": "Binance-peg PAX Gold",
+      "mint": "0x7950865a9140cb519342433146ed5b40c6f210f7",
+      "decimals": 18,
+      "kind": "tokenized_gold",
+      "enabled": true,
+      "minLiquidityUsd": 50000,
+      "notes": "Binance-peg PAXG (BEP-20). Not the Ethereum Paxos PAXG canonical contract; verify address before approve."
+    }
+  ]
+}

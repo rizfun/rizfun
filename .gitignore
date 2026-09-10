@@ -1,0 +1,8 @@
+.env
+.env.*
+**/broadcast/
+**/cache/
+**/out/
+**/lib/
+*.private
+.DS_Store
