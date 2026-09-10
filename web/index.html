@@ -4,65 +4,66 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Riz.Fun · Commodity-paired launches on BSC</title>
-<meta name="description" content="Riz.Fun — launch memecoins paired with BNB, XAUt, and PAXG on BNB Chain. Rice + rizz. No physical custody."/>
+<meta name="description" content="Riz.Fun — launch memecoins paired with BNB, gold (XAUt), and gold (PAXG) on BNB Chain. Rice + rizz."/>
+<meta name="theme-color" content="#07080a"/>
 <link rel="icon" type="image/png" href="assets/rizfun-logo.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
-<div class="ticker"><div class="ticker-track mono">
-  <span>RIZ.FUN · RICE + RIZZ · BSC</span>
-  <span>QUOTES · BNB · XAUt · PAXG</span>
-  <span>CURVE · ~$5k → ~$35k graduate</span>
-  <span>FEE · 40% holders · 30% buyback $RIZ · 30% protocol</span>
-  <span>NO PHYSICAL CUSTODY · TOKENIZED QUOTES ONLY</span>
-  <span>RIZ.FUN · RICE + RIZZ · BSC</span>
-  <span>QUOTES · BNB · XAUt · PAXG</span>
-  <span>CURVE · ~$5k → ~$35k graduate</span>
-  <span>FEE · 40% holders · 30% buyback $RIZ · 30% protocol</span>
-  <span>NO PHYSICAL CUSTODY · TOKENIZED QUOTES ONLY</span>
-</div></div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track mono">
+    <span>RIZ.FUN · RICE + RIZZ · BSC</span>
+    <span>COMMODITIES · BNB · XAUt · PAXG</span>
+    <span>CURVE · ~$5k → ~$35k · THEN LOCKED V4</span>
+    <span>FEE · 40% HOLDERS · 30% BUYBACK $RIZ · 30% PROTOCOL</span>
+    <span>RIZ.FUN · RICE + RIZZ · BSC</span>
+    <span>COMMODITIES · BNB · XAUt · PAXG</span>
+    <span>CURVE · ~$5k → ~$35k · THEN LOCKED V4</span>
+    <span>FEE · 40% HOLDERS · 30% BUYBACK $RIZ · 30% PROTOCOL</span>
+  </div>
+</div>
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#markets" data-goto="markets">
-      <img class="brand-logo" src="assets/rizfun-logo.png" alt="Riz.Fun logo" width="36" height="36"/>
+    <a class="brand" href="#home" data-goto="home">
+      <img class="brand-logo" src="assets/rizfun-logo.png" alt="Riz.Fun" width="36" height="36"/>
       <span class="brand-name">RIZ<span>.FUN</span></span>
     </a>
-    <div class="nav-links">
-      <button type="button" class="nav-btn hide-sm" data-view="markets">Markets</button>
-      <button type="button" class="nav-btn hide-sm" data-view="create">Create</button>
-      <button type="button" class="nav-btn hide-sm" data-view="about">About</button>
-      <span class="chain-pill mono"><span class="dot"></span> BSC · not live</span>
-      <button type="button" class="btn btn-primary btn-sm" data-goto="create">Create coin</button>
-    </div>
+    <nav class="nav-links" aria-label="Primary">
+      <button type="button" class="nav-btn" data-view="home">Home</button>
+      <button type="button" class="nav-btn" data-view="markets">Markets</button>
+      <button type="button" class="nav-btn" data-view="create">Create</button>
+      <button type="button" class="nav-btn" data-view="about">How it works</button>
+      <span class="chain-pill mono"><span class="dot"></span> BSC</span>
+      <button type="button" class="btn btn-primary btn-sm" data-goto="create">Create</button>
+    </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <div class="demo-banner mono">
-    MVP UI · all markets DEMO · Riz.Fun protocol contracts undeployed — no fake addresses
-  </div>
-
-  <!-- MARKETS -->
-  <section class="view" id="view-markets">
+  <!-- HOME / COMMODITIES -->
+  <section class="view" id="view-home">
     <div class="hero">
       <div class="kicker mono">BNB CHAIN · COMMODITY-PAIRED LAUNCHES</div>
-      <h1>Launch coins paired with <span>rice &amp; gold</span></h1>
+      <h1>Memes that <em>pair</em> with <span>real commodities</span></h1>
       <p class="lead">
-        Riz.Fun is a commodites.market-style launcher on BSC. Memecoins quote against
-        <strong>BNB</strong>, <strong>XAUt</strong>, and <strong>PAXG</strong> —
-        bonding curve → locked Uniswap v4. English CT. No physical metal custody.
+        Riz.Fun launches coins against <strong>BNB</strong>, <strong>gold (XAUt)</strong>, and <strong>gold (PAXG)</strong> —
+        rice narrative, soft gold accents, bonding curve to a locked Uniswap v4 pool.
+        Commodities are the product. $RIZ is the protocol token.
       </p>
       <div class="hero-cta">
-        <button type="button" class="btn btn-primary" data-goto="create">Launch a token</button>
-        <button type="button" class="btn btn-ghost" data-goto="about">How it works</button>
+        <button type="button" class="btn btn-primary" data-goto="create">Launch with a commodity</button>
+        <button type="button" class="btn btn-ghost" data-goto="markets">Browse markets</button>
       </div>
       <div class="stats">
-        <div class="stat"><div class="l">Chain</div><div class="v">BSC</div><div class="s">chainId 56</div></div>
-        <div class="stat"><div class="l">Quotes</div><div class="v">BNB+</div><div class="s">XAUt / PAXG</div></div>
-        <div class="stat"><div class="l">Curve</div><div class="v">$5k→$35k</div><div class="s">then v4 pool</div></div>
+        <div class="stat"><div class="l">Chain</div><div class="v">BSC</div><div class="s">BNB Chain</div></div>
+        <div class="stat"><div class="l">Quotes</div><div class="v">3</div><div class="s">BNB · XAUt · PAXG</div></div>
+        <div class="stat"><div class="l">Curve</div><div class="v">$5k→$35k</div><div class="s">then locked v4</div></div>
         <div class="stat"><div class="l">Token</div><div class="v">$RIZ</div><div class="s">buyback leg</div></div>
       </div>
     </div>
@@ -70,17 +71,42 @@
     <div class="section">
       <div class="section-h">
         <div>
-          <h2>Markets board</h2>
-          <p>Demo launches only. Wire live data after deploy.</p>
+          <h2>Commodities</h2>
+          <p>Pick a quote to filter markets or start a launch.</p>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" data-goto="markets">View all markets →</button>
+      </div>
+      <div class="commodity-gallery" id="commodityGallery"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-h">
+        <div>
+          <h2>Featured markets</h2>
+          <p>Sample launches — each row shows its commodity pair.</p>
+        </div>
+      </div>
+      <div class="market-cards" id="featuredMarkets"></div>
+    </div>
+  </section>
+
+  <!-- MARKETS -->
+  <section class="view" id="view-markets">
+    <div class="section" style="padding-top:28px">
+      <div class="section-h">
+        <div>
+          <h2>Markets</h2>
+          <p>Filter by commodity quote. Pair badge is front and center.</p>
         </div>
         <div class="tabs" id="quoteFilters"></div>
       </div>
+
+      <div class="commodity-strip" id="commodityStrip"></div>
+
       <div class="board">
         <div class="board-top">
-          <div class="mono" style="font-size:.82rem;color:var(--muted)">
-            <span class="live-dot"></span>DEMO board · not live · filter by quote
-          </div>
-          <div class="pill demo">EXAMPLE DATA</div>
+          <div class="mono board-label" id="boardLabel">All commodities</div>
+          <div class="pill soft">Sample board</div>
         </div>
         <div class="table-wrap">
           <table>
@@ -88,7 +114,7 @@
               <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Quote</th>
+                <th>Commodity</th>
                 <th>Mcap → $35k</th>
                 <th>Fee</th>
                 <th>Age</th>
@@ -108,65 +134,77 @@
       <div class="section-h">
         <div>
           <h2>Create a launch</h2>
-          <p>Phase A: pick <strong>one</strong> quote from the enabled list. Multi-quote weights come later.</p>
+          <p>Step 1 — choose your commodity pair. Then name, ticker, image, and fee.</p>
         </div>
       </div>
-      <form class="create-grid" id="createForm" novalidate>
-        <div class="card">
-          <h3>Token</h3>
-          <label>Image <span class="hint">(preview only)</span></label>
-          <div class="image-upload">
-            <img id="imgPreview" class="image-preview" alt="Token image preview"/>
-            <div>
-              <input id="tokImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif"/>
-              <p class="submit-note" style="margin-top:8px">PNG / JPG / WEBP · shown locally until deploy</p>
-            </div>
+
+      <form class="create-layout" id="createForm" novalidate>
+        <div class="create-main">
+          <div class="card step-card">
+            <div class="step-label mono">01 · Commodity pair</div>
+            <h3>Choose your quote</h3>
+            <p class="card-lead">Your coin bonds against one commodity. Gold badges for XAUt / PAXG; rice for BNB.</p>
+            <div class="commodity-picker" id="quotePicker"></div>
           </div>
-          <div class="row2">
-            <div>
-              <label for="tokName">Name</label>
-              <input id="tokName" name="name" placeholder="e.g. Rice Rocket" maxlength="32" required/>
+
+          <div class="card step-card">
+            <div class="step-label mono">02 · Token details</div>
+            <h3>Name, ticker &amp; image</h3>
+            <label>Image <span class="hint">(preview)</span></label>
+            <div class="image-upload">
+              <img id="imgPreview" class="image-preview" alt="Token image preview"/>
+              <div>
+                <input id="tokImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif"/>
+                <p class="submit-note" style="margin-top:8px">PNG / JPG / WEBP / GIF</p>
+              </div>
             </div>
-            <div>
-              <label for="tokTicker">Ticker</label>
-              <input id="tokTicker" name="ticker" placeholder="e.g. RIZZR" maxlength="10" required/>
+            <div class="row2">
+              <div>
+                <label for="tokName">Name</label>
+                <input id="tokName" name="name" placeholder="e.g. Rice Rocket" maxlength="32" required/>
+              </div>
+              <div>
+                <label for="tokTicker">Ticker</label>
+                <input id="tokTicker" name="ticker" placeholder="e.g. RIZZR" maxlength="10" required/>
+              </div>
             </div>
-          </div>
-          <label>Quote <span class="hint">(pick ONE · Phase A)</span></label>
-          <div class="quote-grid" id="quotePicker"></div>
-          <label for="feeRange">Trading fee <span class="hint">(1–3%)</span></label>
-          <div class="fee-range">
-            <input id="feeRange" type="range" min="1" max="3" step="0.5" value="2"/>
-            <span class="fee-val mono" id="feeVal">2.0%</span>
-          </div>
-          <label for="firstBuy">Optional first buy <span class="hint">(amount in selected quote)</span></label>
-          <input id="firstBuy" type="number" min="0" step="any" placeholder="e.g. 0.05"/>
-          <div class="row2">
-            <div>
-              <label for="socialX">X / Twitter</label>
-              <input id="socialX" type="url" placeholder="https://x.com/project"/>
+            <label for="feeRange">Trading fee <span class="hint">(1–3%)</span></label>
+            <div class="fee-range">
+              <input id="feeRange" type="range" min="1" max="3" step="0.5" value="2"/>
+              <span class="fee-val mono" id="feeVal">2.0%</span>
             </div>
-            <div>
-              <label for="socialTg">Telegram</label>
-              <input id="socialTg" type="url" placeholder="https://t.me/project"/>
+            <label for="firstBuy">Optional first buy <span class="hint">(in selected quote)</span></label>
+            <input id="firstBuy" type="number" min="0" step="any" placeholder="e.g. 0.05"/>
+            <div class="row2">
+              <div>
+                <label for="socialX">X / Twitter</label>
+                <input id="socialX" type="url" placeholder="https://x.com/project"/>
+              </div>
+              <div>
+                <label for="socialTg">Telegram</label>
+                <input id="socialTg" type="url" placeholder="https://t.me/project"/>
+              </div>
             </div>
-          </div>
-          <div style="margin-top:18px">
-            <button class="btn btn-primary" type="submit" style="width:100%">
-              Contracts not live yet — coming after deploy
-            </button>
-            <p id="createMsg" class="warn-box" hidden></p>
-            <p class="submit-note">
-              Submit is UI-only. We will never invent Riz.Fun contract addresses.
-              Third-party quote token addresses come from <span class="mono">commodities.json</span> only.
-            </p>
+            <div style="margin-top:20px">
+              <button class="btn btn-primary" type="submit" style="width:100%">Coming soon</button>
+              <p id="createMsg" class="soft-note" hidden></p>
+              <p class="submit-note">Launch creation opens when the protocol ships. No invented contract addresses.</p>
+            </div>
           </div>
         </div>
-        <div class="card summary">
+
+        <aside class="card summary sticky-summary">
+          <div class="pair-headline" id="sumPairHeadline">
+            <div class="pair-badge bnb" id="sumPairBadge">BNB</div>
+            <div>
+              <div class="pair-kicker mono">Paired with</div>
+              <div class="pair-name" id="sumPairName">BNB</div>
+            </div>
+          </div>
           <h3>Launch summary</h3>
           <div class="row"><span class="k">Name</span><span id="sumName">—</span></div>
           <div class="row"><span class="k">Ticker</span><span class="mono" id="sumTicker">—</span></div>
-          <div class="row"><span class="k">Quote</span><span class="mono" id="sumQuote">BNB</span></div>
+          <div class="row"><span class="k">Commodity</span><span class="mono" id="sumQuote">BNB</span></div>
           <div class="row"><span class="k">Trading fee</span><span class="mono" id="sumFee">2.0%</span></div>
           <div class="row"><span class="k">First buy</span><span class="mono" id="sumFirstBuy">None</span></div>
           <div class="row"><span class="k">Starting mcap</span><span class="mono">~$5,000</span></div>
@@ -174,43 +212,39 @@
           <div class="row"><span class="k">Supply</span><span class="mono">1,000,000,000</span></div>
           <div class="row"><span class="k">Liquidity</span><span>Locked Uniswap v4 LP</span></div>
           <div class="fee-box">
-            Fee split of trading fee: <strong>40%</strong> holders (paired commodity) ·
-            <strong>30%</strong> buyback/burn <strong>$RIZ</strong> ·
-            <strong>30%</strong> protocol. Creator has no special fee share.
+            Fee split: <strong>40%</strong> holders (in paired commodity) ·
+            <strong>30%</strong> buyback <strong>$RIZ</strong> ·
+            <strong>30%</strong> protocol.
           </div>
-          <div class="warn-box">
-            No physical gold/rice custody. XAUt / PAXG are third-party tokenized quotes.
-            Launches can go to zero.
-          </div>
-        </div>
+        </aside>
       </form>
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ABOUT / HOW IT WORKS -->
   <section class="view" id="view-about">
     <div class="section" style="padding-top:28px">
       <div class="section-h">
         <div>
           <h2>How it works</h2>
-          <p>Bonding curve → graduate → locked Uniswap v4 pool.</p>
+          <p>Commodity pair → bonding curve → graduated locked pool.</p>
         </div>
       </div>
       <div class="how">
         <div class="step">
-          <div class="n">01 · CREATE</div>
-          <h3>Pick a quote &amp; fee</h3>
-          <p>Image, name, ticker, socials. Choose one enabled quote (BNB / XAUt / PAXG). Set trading fee 1–3%. Optional first buy.</p>
+          <div class="n">01</div>
+          <h3>Pair with a commodity</h3>
+          <p>Choose BNB, XAUt, or PAXG. Your meme bonds against that quote — gold or rice energy from day one.</p>
         </div>
         <div class="step">
-          <div class="n">02 · CURVE</div>
-          <h3>~$5k → ~$35k</h3>
-          <p>Constant-product bonding curve in the chosen quote. Fixed <strong>1B</strong> supply. Sell anytime until graduation.</p>
+          <div class="n">02</div>
+          <h3>Ride the curve</h3>
+          <p>Constant-product bonding curve from ~$5k to ~$35k. Fixed 1B supply. Trade in the chosen commodity until graduation.</p>
         </div>
         <div class="step">
-          <div class="n">03 · GRADUATE</div>
-          <h3>Locked v4 pool</h3>
-          <p>At ~$35k endpoint, reserves seed a Uniswap v4 full-range pool. LP NFT locked permanently — no withdraw by creator or protocol.</p>
+          <div class="n">03</div>
+          <h3>Graduate to locked v4</h3>
+          <p>At the endpoint, reserves seed a Uniswap v4 full-range pool. LP is locked permanently.</p>
         </div>
       </div>
     </div>
@@ -219,7 +253,7 @@
       <div class="section-h">
         <div>
           <h2>Fee split</h2>
-          <p>Of the trading fee on the quote leg (product lock).</p>
+          <p>Of the trading fee on the quote leg.</p>
         </div>
       </div>
       <div class="card" style="overflow:auto">
@@ -228,10 +262,10 @@
             <tr><th>Share</th><th>%</th><th>Destination</th></tr>
           </thead>
           <tbody>
-            <tr><td>Holders</td><td class="mono">40%</td><td>Paid in the <strong>paired commodity</strong> (~15m cadence target)</td></tr>
-            <tr><td>Buyback</td><td class="mono">30%</td><td>Buy + burn (or lock→burn) of protocol token <strong>$RIZ</strong></td></tr>
+            <tr><td>Holders</td><td class="mono">40%</td><td>Paid in the <strong>paired commodity</strong></td></tr>
+            <tr><td>Buyback</td><td class="mono">30%</td><td>Buy + burn of protocol token <strong>$RIZ</strong></td></tr>
             <tr><td>Protocol</td><td class="mono">30%</td><td>Treasury / ops</td></tr>
-            <tr><td>Creator special</td><td class="mono">0%</td><td>Creator earns only as a holder — no special cut</td></tr>
+            <tr><td>Creator</td><td class="mono">0%</td><td>Earns only as a holder — no special cut</td></tr>
           </tbody>
         </table>
       </div>
@@ -240,41 +274,46 @@
     <div class="section">
       <div class="section-h">
         <div>
-          <h2>What Riz.Fun is</h2>
-          <p>Rice + rizz · commodities humor · CT English.</p>
+          <h2>About Riz.Fun</h2>
+          <p>Rice + rizz · commodities-first · CT English · BSC.</p>
         </div>
       </div>
       <div class="how">
         <div class="step">
-          <div class="n">ARE</div>
-          <h3>BSC commodities launcher</h3>
-          <p>Pons V2–lineage (MIT) → Uniswap v4 on BSC. Commodity-quote first. Protocol buyback token <strong>$RIZ</strong>.</p>
-        </div>
-        <div class="step">
-          <div class="n">ARE NOT</div>
-          <h3>Not a vault</h3>
-          <p>We do <strong>not</strong> custody physical gold, oil, or rice. We do not invent deployed contract addresses.</p>
+          <div class="n">BRAND</div>
+          <h3>Rice + rizz</h3>
+          <p>Humor meets premium dark CT. Soft gold and cream accents. Protocol token <strong>$RIZ</strong>.</p>
         </div>
         <div class="step">
           <div class="n">QUOTES</div>
-          <h3>Registry day-1</h3>
-          <p>BNB (native), XAUt (Tether Gold on BSC), PAXG (Binance-peg). Approval ≠ endorsement. Thin books stay disabled.</p>
+          <h3>BNB · XAUt · PAXG</h3>
+          <p>Native BNB plus tokenized gold on BNB Chain. Registry lives in <span class="mono">commodities.json</span>.</p>
         </div>
-      </div>
-      <div class="disclaimer">
-        <strong>Disclaimer:</strong> Riz.Fun does not custody physical commodities.
-        Tokenized gold quotes (XAUt, PAXG) are third-party BEP-20 tokens — not an affiliation with Tether, Paxos, or Binance beyond using public on-chain assets.
-        Names and tickers are not unique. Launched tokens can go to zero. Not financial advice.
-        Protocol contracts are <strong>undeployed</strong> as of this MVP UI.
+        <div class="step">
+          <div class="n">SCOPE</div>
+          <h3>On-chain quotes only</h3>
+          <p>Tokenized commodity quotes — not a physical vault. No invented live contract addresses.</p>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">
-    <div>Riz.Fun · $RIZ · BSC commodities launcher · MVP UI</div>
-    <div class="mono">Not OreFun · no physical custody · contracts not live</div>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img src="assets/rizfun-logo.png" alt="" width="28" height="28"/>
+      <div>
+        <div class="footer-name">Riz.Fun</div>
+        <div class="footer-sub mono">$RIZ · BSC · rice + rizz</div>
+      </div>
+    </div>
+    <div class="footer-links">
+      <button type="button" class="linkish" data-goto="home">Commodities</button>
+      <button type="button" class="linkish" data-goto="markets">Markets</button>
+      <button type="button" class="linkish" data-goto="create">Create</button>
+      <button type="button" class="linkish" data-goto="about">How it works</button>
+    </div>
   </div>
 </footer>
 

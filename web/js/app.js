@@ -1,19 +1,18 @@
-/* Riz.Fun BSC launcher MVP — frontend only. No live protocol contracts. */
+/* Riz.Fun — commodities-first launcher UI (frontend only) */
 (function () {
   "use strict";
 
   const GRADUATE_USD = 35000;
-  const OPEN_USD = 5000;
 
   const FALLBACK_QUOTES = [
     {
       symbol: "BNB",
-      name: "BNB (native)",
+      name: "BNB",
       mint: "0x0000000000000000000000000000000000000000",
       decimals: 18,
       kind: "native",
       enabled: true,
-      notes: "Native gas token",
+      vibe: "Native gas · rice narrative on BSC",
     },
     {
       symbol: "XAUt",
@@ -22,93 +21,34 @@
       decimals: 6,
       kind: "tokenized_gold",
       enabled: true,
-      notes: "Tether Gold on BNB Chain",
+      vibe: "Tokenized gold · soft auric pair",
     },
     {
       symbol: "PAXG",
-      name: "Binance-peg PAX Gold",
+      name: "PAX Gold",
       mint: "0x7950865a9140cb519342433146ed5b40c6f210f7",
       decimals: 18,
       kind: "tokenized_gold",
       enabled: true,
-      notes: "Binance-peg PAXG (BEP-20)",
+      vibe: "Tokenized gold · Binance-peg on BSC",
     },
   ];
 
-  /** Demo markets — clearly fictional until deploy */
-  const DEMO_MARKETS = [
-    {
-      name: "Rice Rocket",
-      ticker: "RIZZR",
-      quote: "BNB",
-      mcap: 18200,
-      fee: 2,
-      ageHours: 4,
-      avatar: "RR",
-    },
-    {
-      name: "Gold Grain",
-      ticker: "GGRAIN",
-      quote: "XAUt",
-      mcap: 27400,
-      fee: 1.5,
-      ageHours: 11,
-      avatar: "GG",
-    },
-    {
-      name: "Pax Bowl",
-      ticker: "PBOWL",
-      quote: "PAXG",
-      mcap: 9100,
-      fee: 3,
-      ageHours: 2,
-      avatar: "PB",
-    },
-    {
-      name: "Sticky Hands",
-      ticker: "STICKY",
-      quote: "BNB",
-      mcap: 32100,
-      fee: 1,
-      ageHours: 28,
-      avatar: "SH",
-    },
-    {
-      name: "Auric Rice",
-      ticker: "ARICE",
-      quote: "XAUt",
-      mcap: 14800,
-      fee: 2.5,
-      ageHours: 7,
-      avatar: "AR",
-    },
-    {
-      name: "Chopstick Cat",
-      ticker: "CHOP",
-      quote: "PAXG",
-      mcap: 5600,
-      fee: 2,
-      ageHours: 1,
-      avatar: "CC",
-    },
-    {
-      name: "BNB Bento",
-      ticker: "BENTO",
-      quote: "BNB",
-      mcap: 22100,
-      fee: 1.5,
-      ageHours: 16,
-      avatar: "BB",
-    },
-    {
-      name: "Vault Rice",
-      ticker: "VRICE",
-      quote: "XAUt",
-      mcap: 33900,
-      fee: 1,
-      ageHours: 42,
-      avatar: "VR",
-    },
+  const VIBES = {
+    BNB: "Native gas · rice narrative on BSC",
+    XAUt: "Tokenized gold · soft auric pair",
+    PAXG: "Tokenized gold · Binance-peg on BSC",
+  };
+
+  const SAMPLE_MARKETS = [
+    { name: "Rice Rocket", ticker: "RIZZR", quote: "BNB", mcap: 18200, fee: 2, ageHours: 4, avatar: "RR" },
+    { name: "Gold Grain", ticker: "GGRAIN", quote: "XAUt", mcap: 27400, fee: 1.5, ageHours: 11, avatar: "GG" },
+    { name: "Pax Bowl", ticker: "PBOWL", quote: "PAXG", mcap: 9100, fee: 3, ageHours: 2, avatar: "PB" },
+    { name: "Sticky Hands", ticker: "STICKY", quote: "BNB", mcap: 32100, fee: 1, ageHours: 28, avatar: "SH" },
+    { name: "Auric Rice", ticker: "ARICE", quote: "XAUt", mcap: 14800, fee: 2.5, ageHours: 7, avatar: "AR" },
+    { name: "Chopstick Cat", ticker: "CHOP", quote: "PAXG", mcap: 5600, fee: 2, ageHours: 1, avatar: "CC" },
+    { name: "BNB Bento", ticker: "BENTO", quote: "BNB", mcap: 22100, fee: 1.5, ageHours: 16, avatar: "BB" },
+    { name: "Vault Rice", ticker: "VRICE", quote: "XAUt", mcap: 33900, fee: 1, ageHours: 42, avatar: "VR" },
   ];
 
   let quotes = FALLBACK_QUOTES.slice();
@@ -131,16 +71,30 @@
   function formatAge(hours) {
     if (hours < 1) return "<1h";
     if (hours < 24) return hours + "h";
-    const d = Math.floor(hours / 24);
-    return d + "d";
+    return Math.floor(hours / 24) + "d";
   }
 
   function avatarClass(quote) {
     const q = (quote || "").toLowerCase();
-    if (q === "bnb") return "bnb";
-    if (q === "xaut") return "xaut";
-    if (q === "paxg") return "paxg";
+    if (q === "bnb" || q === "xaut" || q === "paxg") return q;
     return "";
+  }
+
+  function quoteMeta(symbol) {
+    const q = quotes.find((x) => x.symbol === symbol);
+    return {
+      symbol: symbol,
+      name: (q && q.name) || symbol,
+      vibe: (q && (q.vibe || q.notes)) || VIBES[symbol] || "",
+      kind: (q && q.kind) || "",
+    };
+  }
+
+  function displayName(q) {
+    if (q.symbol === "BNB") return "BNB";
+    if (q.symbol === "XAUt") return "Gold (XAUt)";
+    if (q.symbol === "PAXG") return "Gold (PAXG)";
+    return q.name || q.symbol;
   }
 
   function showView(id) {
@@ -154,11 +108,110 @@
     }
   }
 
+  function selectCommodity(symbol, opts) {
+    opts = opts || {};
+    selectedQuote = symbol;
+    filterQuote = symbol;
+    renderCreateQuotes();
+    updateSummary();
+    renderQuoteFilters();
+    renderCommodityStrip();
+    renderMarkets();
+    renderFeatured();
+    if (opts.go === "create") {
+      showView("create");
+    } else if (opts.go === "markets") {
+      showView("markets");
+    }
+  }
+
+  function renderCommodityGallery() {
+    const el = $("#commodityGallery");
+    if (!el) return;
+    const enabled = quotes.filter((q) => q.enabled !== false);
+    el.innerHTML = enabled
+      .map((q) => {
+        const cls = avatarClass(q.symbol);
+        const vibe = q.vibe || VIBES[q.symbol] || q.notes || "";
+        return (
+          '<button type="button" class="commodity-card ' +
+          cls +
+          '" data-commodity="' +
+          q.symbol +
+          '">' +
+          '<div class="icon">' +
+          q.symbol.slice(0, 4) +
+          "</div>" +
+          '<div class="sym">' +
+          displayName(q) +
+          "</div>" +
+          '<div class="name">' +
+          (q.kind === "native" ? "Native quote" : "Tokenized gold") +
+          "</div>" +
+          '<p class="vibe">' +
+          vibe +
+          "</p>" +
+          '<span class="cta-hint">Filter markets · or create →</span>' +
+          "</button>"
+        );
+      })
+      .join("");
+    $all("[data-commodity]", el).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectCommodity(btn.getAttribute("data-commodity"), { go: "markets" });
+      });
+    });
+  }
+
+  function renderCommodityStrip() {
+    const el = $("#commodityStrip");
+    if (!el) return;
+    const enabled = quotes.filter((q) => q.enabled !== false);
+    el.innerHTML = enabled
+      .map((q) => {
+        const cls = avatarClass(q.symbol);
+        const on = filterQuote === q.symbol ? " on" : "";
+        return (
+          '<button type="button" class="strip-card ' +
+          cls +
+          on +
+          '" data-strip="' +
+          q.symbol +
+          '">' +
+          '<div class="mini">' +
+          q.symbol.slice(0, 4) +
+          "</div>" +
+          "<div><div class=\"t\">" +
+          displayName(q) +
+          '</div><div class="d">' +
+          (q.kind === "native" ? "Rice · native" : "Gold quote") +
+          "</div></div></button>"
+        );
+      })
+      .join("");
+    $all("[data-strip]", el).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const sym = btn.getAttribute("data-strip");
+        filterQuote = filterQuote === sym ? "ALL" : sym;
+        selectedQuote = sym;
+        renderCommodityStrip();
+        renderQuoteFilters();
+        renderMarkets();
+        renderCreateQuotes();
+        updateSummary();
+      });
+    });
+  }
+
   function renderQuoteFilters() {
     const el = $("#quoteFilters");
     if (!el) return;
     const enabled = quotes.filter((q) => q.enabled !== false);
-    const bits = ['<button type="button" class="tab' + (filterQuote === "ALL" ? " active" : "") + '" data-filter="ALL">All</button>'];
+    const bits = [
+      '<button type="button" class="tab' +
+        (filterQuote === "ALL" ? " active" : "") +
+        '" data-filter="ALL">All</button>',
+    ];
     enabled.forEach((q) => {
       bits.push(
         '<button type="button" class="tab' +
@@ -175,6 +228,7 @@
       btn.addEventListener("click", () => {
         filterQuote = btn.getAttribute("data-filter");
         renderQuoteFilters();
+        renderCommodityStrip();
         renderMarkets();
       });
     });
@@ -182,18 +236,24 @@
 
   function renderMarkets() {
     const tbody = $("#marketsBody");
+    const label = $("#boardLabel");
+    if (label) {
+      label.textContent =
+        filterQuote === "ALL" ? "All commodities" : "Paired with " + filterQuote;
+    }
     if (!tbody) return;
-    const rows = DEMO_MARKETS.filter(
+    const rows = SAMPLE_MARKETS.filter(
       (m) => filterQuote === "ALL" || m.quote === filterQuote
     );
     if (!rows.length) {
       tbody.innerHTML =
-        '<tr><td colspan="7" style="color:var(--muted);padding:24px">No DEMO markets for this quote.</td></tr>';
+        '<tr><td colspan="7" style="color:var(--muted);padding:28px;text-align:center">No markets for this commodity yet.</td></tr>';
       return;
     }
     tbody.innerHTML = rows
       .map((m, i) => {
         const pct = Math.min(100, Math.round((m.mcap / GRADUATE_USD) * 100));
+        const qCls = m.quote.toLowerCase();
         return (
           "<tr>" +
           '<td class="mono">' +
@@ -207,18 +267,17 @@
           "</div>" +
           "<div><div class=\"name\">" +
           m.name +
-          ' <span class="pill demo">DEMO</span></div>' +
-          '<div class="sym mono">$' +
+          '</div><div class="sym mono">$' +
           m.ticker +
           "</div></div></div></td>" +
           '<td><span class="pill quote-' +
-          m.quote.toLowerCase() +
+          qCls +
           '">' +
-          m.quote +
+          (m.quote === "BNB" ? "🍚 BNB" : "✦ " + m.quote) +
           "</span></td>" +
           '<td class="mcap-cell"><div class="mono">' +
           formatUsd(m.mcap) +
-          '</div><div class="progress" title="Progress to ~$35k graduate"><i style="width:' +
+          '</div><div class="progress"><i style="width:' +
           pct +
           '%"></i></div>' +
           '<div class="mcap-meta"><span>' +
@@ -232,8 +291,48 @@
           '<td class="mono">' +
           formatAge(m.ageHours) +
           "</td>" +
-          '<td><button type="button" class="btn btn-ghost btn-sm" disabled title="Contracts not live yet">Trade</button></td>' +
+          '<td><button type="button" class="btn btn-ghost btn-sm" data-goto-create-with="' +
+          m.quote +
+          '">Pair</button></td>' +
           "</tr>"
+        );
+      })
+      .join("");
+    $all("[data-goto-create-with]", tbody).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectCommodity(btn.getAttribute("data-goto-create-with"), { go: "create" });
+      });
+    });
+  }
+
+  function renderFeatured() {
+    const el = $("#featuredMarkets");
+    if (!el) return;
+    const rows = SAMPLE_MARKETS.slice(0, 4);
+    el.innerHTML = rows
+      .map((m) => {
+        const pct = Math.min(100, Math.round((m.mcap / GRADUATE_USD) * 100));
+        return (
+          '<div class="m-card">' +
+          '<div class="avatar ' +
+          avatarClass(m.quote) +
+          '">' +
+          m.avatar +
+          "</div>" +
+          '<div class="meta"><div class="name">' +
+          m.name +
+          '</div><div class="sym mono">$' +
+          m.ticker +
+          ' · <span class="pill quote-' +
+          m.quote.toLowerCase() +
+          '" style="margin-left:4px">' +
+          m.quote +
+          "</span></div></div>" +
+          '<div class="right"><div class="mcap mono">' +
+          formatUsd(m.mcap) +
+          '</div><div class="pct">' +
+          pct +
+          "% to graduate</div></div></div>"
         );
       })
       .join("");
@@ -249,24 +348,24 @@
     el.innerHTML = enabled
       .map((q) => {
         const on = q.symbol === selectedQuote ? " on" : "";
-        const kind =
-          q.kind === "native"
-            ? "Native quote"
-            : q.kind === "tokenized_gold"
-            ? "Tokenized gold"
-            : q.kind || "Quote";
+        const cls = avatarClass(q.symbol);
+        const vibe = q.vibe || VIBES[q.symbol] || "";
         return (
-          '<button type="button" class="quote' +
+          '<button type="button" class="quote ' +
+          cls +
           on +
           '" data-symbol="' +
           q.symbol +
           '">' +
+          '<div class="icon-sm">' +
+          q.symbol.slice(0, 4) +
+          "</div>" +
           '<div class="t">' +
-          q.symbol +
+          displayName(q) +
           "</div>" +
           '<div class="d">' +
-          (q.name || kind) +
-          " · Phase A</div>" +
+          vibe +
+          "</div>" +
           "</button>"
         );
       })
@@ -281,19 +380,31 @@
   }
 
   function updateSummary() {
+    const meta = quoteMeta(selectedQuote);
     const name = ($("#tokName") && $("#tokName").value.trim()) || "—";
-    const ticker = ($("#tokTicker") && $("#tokTicker").value.trim().toUpperCase()) || "—";
+    const tickerRaw = ($("#tokTicker") && $("#tokTicker").value.trim().toUpperCase()) || "";
+    const firstBuy = ($("#firstBuy") && $("#firstBuy").value.trim()) || "0";
+
     const feeEl = $("#sumFee");
     const quoteEl = $("#sumQuote");
     const nameEl = $("#sumName");
     const tickEl = $("#sumTicker");
-    const firstBuy = ($("#firstBuy") && $("#firstBuy").value.trim()) || "0";
     if (feeEl) feeEl.textContent = feePct.toFixed(1) + "%";
     if (quoteEl) quoteEl.textContent = selectedQuote;
     if (nameEl) nameEl.textContent = name;
-    if (tickEl) tickEl.textContent = ticker === "—" ? "—" : "$" + ticker;
+    if (tickEl) tickEl.textContent = tickerRaw ? "$" + tickerRaw : "—";
     const fb = $("#sumFirstBuy");
-    if (fb) fb.textContent = firstBuy && Number(firstBuy) > 0 ? firstBuy + " " + selectedQuote : "None";
+    if (fb)
+      fb.textContent =
+        firstBuy && Number(firstBuy) > 0 ? firstBuy + " " + selectedQuote : "None";
+
+    const badge = $("#sumPairBadge");
+    const pairName = $("#sumPairName");
+    if (badge) {
+      badge.className = "pair-badge " + avatarClass(selectedQuote);
+      badge.textContent = selectedQuote.slice(0, 4);
+    }
+    if (pairName) pairName.textContent = displayName(meta);
   }
 
   function setupCreateForm() {
@@ -327,8 +438,7 @@
           preview.removeAttribute("src");
           return;
         }
-        const url = URL.createObjectURL(file);
-        preview.src = url;
+        preview.src = URL.createObjectURL(file);
         preview.classList.add("show");
       });
     }
@@ -339,7 +449,7 @@
         const msg = $("#createMsg");
         if (msg) {
           msg.textContent =
-            "Contracts not live yet — coming after deploy. No fake addresses. Your form is UI-only for now.";
+            "Coming soon — launch creation opens when the protocol ships. Your details stay local for now.";
           msg.hidden = false;
         }
       });
@@ -354,12 +464,15 @@
         if (id) showView(id);
       });
     });
-    const hash = (location.hash || "#markets").replace("#", "");
-    const allowed = ["markets", "create", "about"];
-    showView(allowed.includes(hash) ? hash : "markets");
+    const hash = (location.hash || "#home").replace("#", "");
+    const allowed = ["home", "markets", "create", "about"];
+    const legacy = { commodities: "home" };
+    const resolved = legacy[hash] || hash;
+    showView(allowed.includes(resolved) ? resolved : "home");
     window.addEventListener("hashchange", () => {
-      const h = (location.hash || "#markets").replace("#", "");
-      if (allowed.includes(h)) showView(h);
+      const h = (location.hash || "#home").replace("#", "");
+      const r = legacy[h] || h;
+      if (allowed.includes(r)) showView(r);
     });
   }
 
@@ -369,7 +482,10 @@
       if (!res.ok) throw new Error("bad status");
       const data = await res.json();
       if (data && Array.isArray(data.quotes) && data.quotes.length) {
-        quotes = data.quotes;
+        quotes = data.quotes.map((q) => ({
+          ...q,
+          vibe: q.vibe || VIBES[q.symbol] || q.notes || "",
+        }));
       }
     } catch (err) {
       console.warn("Using embedded quote registry fallback", err);
@@ -381,8 +497,11 @@
     setupNav();
     setupCreateForm();
     await loadQuotes();
+    renderCommodityGallery();
+    renderCommodityStrip();
     renderQuoteFilters();
     renderMarkets();
+    renderFeatured();
     renderCreateQuotes();
     updateSummary();
   }

@@ -1,41 +1,32 @@
-# Riz.Fun — BSC launcher frontend (MVP)
+# Riz.Fun — public site
 
-Static HTML/CSS/JS UI for **Riz.Fun** (`$RIZ`, rice + rizz) on **BNB Chain**.
+Static HTML/CSS/JS for **Riz.Fun** (`$RIZ`, rice + rizz) on **BNB Chain**.
 
-This is a **frontend-only** MVP. Protocol contracts are **not deployed**. Markets are **DEMO**. No fake Riz.Fun addresses.
+Commodities-first launcher UI: pair memes with **BNB**, **XAUt**, and **PAXG**.
 
 ## Open locally
 
-From this directory:
-
 ```bash
-cd /workspace/akatsuki/orefun/bsc/web
+cd web
 python3 -m http.server 8765
 ```
 
-Then open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) in a browser.
+Open http://127.0.0.1:8765/
 
-A simple file open (`file://`) may work for layout, but loading `commodities.json` needs a local server (CORS / fetch).
-
-## Pages
+## Views
 
 | Tab | What |
 |-----|------|
-| **Markets** | Demo board — name, ticker, quote (BNB/XAUt/PAXG), mcap progress to ~$35k, fee %, age. Filter by quote. |
-| **Create** | Image preview, name, ticker, one quote (Phase A), fee 1–3%, optional first buy, socials. Submit is blocked with “Contracts not live yet”. |
-| **About** | Curve ~$5k→~$35k, 1B supply, fee split 40/30/30, no physical custody disclaimer. |
+| **Home** | Hero + commodities gallery + featured markets |
+| **Markets** | Board filtered by commodity; pair badge prominent |
+| **Create** | Step 1 = commodity picker, then token details; summary headlines the pair |
+| **How it works** | Pair → curve (~$5k→~$35k) → locked Uniswap v4; fee split 40/30/30 |
 
 ## Assets
 
-- Locked logo: `assets/rizfun-logo.png` (copied from `../brand/rizfun-logo-LOCKED.png`)
-- Quote registry: `commodities.json` (copied from `../commodities.json`)
+- Locked logo: `assets/rizfun-logo.png`
+- Quote registry: `commodities.json`
 
-## Deploy later
+## Deploy
 
-GitHub Pages (or any static host) can serve this folder as-is. Do **not** publish invented contract addresses.
-
-## Hard rules baked in
-
-- Never invent live Riz.Fun contract addresses
-- Never claim physical gold/rice custody
-- All market rows labeled **DEMO** until real deploy
+GitHub Pages serves `rizfun/rizfun-site` from repo root.
