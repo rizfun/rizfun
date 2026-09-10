@@ -2,7 +2,7 @@
   "chainId": 56,
   "chain": "bsc",
   "updatedAt": "2026-09-11",
-  "notes": "Riz.Fun commodity registry on BNB Chain. Day-1 live quotes ship with real mints; the wider catalog expands as tokenized quotes come online. Native BNB uses address(0).",
+  "notes": "Riz.Fun commodity quote registry on BNB Chain. Day-1 live quotes ship with real mints; the wider CME-style catalog expands as tokenized quotes come online. Native BNB uses address(0). Soon entries have no contract mint.",
   "quotes": [
     {
       "symbol": "BNB",
@@ -61,6 +61,34 @@
       "notes": "Tokenized silver quote TBD."
     },
     {
+      "symbol": "XPT",
+      "name": "Platinum",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_metal",
+      "category": "metals",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "◎",
+      "vibe": "PGM complex · autocatalyst lore",
+      "notes": "Tokenized platinum quote TBD."
+    },
+    {
+      "symbol": "XPD",
+      "name": "Palladium",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_metal",
+      "category": "metals",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "◉",
+      "vibe": "PGM twin · catalytic demand",
+      "notes": "Tokenized palladium quote TBD."
+    },
+    {
       "symbol": "COPPER",
       "name": "Copper",
       "mint": null,
@@ -75,8 +103,64 @@
       "notes": "Tokenized copper quote TBD."
     },
     {
+      "symbol": "ALU",
+      "name": "Aluminum",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_metal",
+      "category": "metals",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "⬜",
+      "vibe": "Light metal · cans to aerospace",
+      "notes": "Tokenized aluminum quote TBD."
+    },
+    {
+      "symbol": "IRON",
+      "name": "Iron Ore",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_metal",
+      "category": "metals",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "🪨",
+      "vibe": "Steel feedstock · China demand pulse",
+      "notes": "Tokenized iron ore quote TBD."
+    },
+    {
+      "symbol": "LI",
+      "name": "Lithium",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_metal",
+      "category": "metals",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "🔋",
+      "vibe": "Battery metal · EV supply chain",
+      "notes": "Tokenized lithium quote TBD."
+    },
+    {
+      "symbol": "U",
+      "name": "Uranium",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_energy",
+      "category": "energy",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "☢",
+      "vibe": "Nuclear fuel · long-cycle energy",
+      "notes": "Tokenized uranium quote TBD."
+    },
+    {
       "symbol": "WTI",
-      "name": "Crude Oil",
+      "name": "Crude Oil (WTI)",
       "mint": null,
       "decimals": null,
       "kind": "tokenized_energy",
@@ -86,7 +170,21 @@
       "minLiquidityUsd": 0,
       "icon": "🛢",
       "vibe": "WTI crude · black-gold energy",
-      "notes": "Tokenized WTI / crude quote TBD."
+      "notes": "Tokenized WTI crude quote TBD."
+    },
+    {
+      "symbol": "BRENT",
+      "name": "Brent Crude",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_energy",
+      "category": "energy",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "🌊",
+      "vibe": "North Sea crude · global oil marker",
+      "notes": "Tokenized Brent quote TBD."
     },
     {
       "symbol": "NG",
@@ -101,6 +199,20 @@
       "icon": "🔥",
       "vibe": "Henry Hub energy · winter spike lore",
       "notes": "Tokenized natural gas quote TBD."
+    },
+    {
+      "symbol": "COAL",
+      "name": "Coal",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_energy",
+      "category": "energy",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "⬛",
+      "vibe": "Thermal & met coal · power feedstock",
+      "notes": "Tokenized coal quote TBD."
     },
     {
       "symbol": "WHEAT",
@@ -145,6 +257,20 @@
       "notes": "Tokenized soybeans quote TBD."
     },
     {
+      "symbol": "RICE",
+      "name": "Rice",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_ag",
+      "category": "agriculture",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "🍚",
+      "vibe": "Namesake grain · narrative quote TBD",
+      "notes": "Narrative tokenized rice quote TBD."
+    },
+    {
       "symbol": "COFFEE",
       "name": "Coffee",
       "mint": null,
@@ -171,20 +297,6 @@
       "icon": "🍫",
       "vibe": "Bean softs · confection lore",
       "notes": "Tokenized cocoa quote TBD."
-    },
-    {
-      "symbol": "RICE",
-      "name": "Rice",
-      "mint": null,
-      "decimals": null,
-      "kind": "tokenized_ag",
-      "category": "agriculture",
-      "status": "soon",
-      "enabled": false,
-      "minLiquidityUsd": 0,
-      "icon": "🍚",
-      "vibe": "Namesake grain · narrative quote TBD",
-      "notes": "Narrative tokenized rice quote TBD."
     },
     {
       "symbol": "SUGAR",
@@ -215,6 +327,34 @@
       "notes": "Tokenized cotton quote TBD."
     },
     {
+      "symbol": "OJ",
+      "name": "Orange Juice",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_ag",
+      "category": "agriculture",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "🍊",
+      "vibe": "FCOJ softs · freeze-risk classic",
+      "notes": "Tokenized orange juice quote TBD."
+    },
+    {
+      "symbol": "MILK",
+      "name": "Milk",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_ag",
+      "category": "agriculture",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "🥛",
+      "vibe": "Class III dairy · protein complex",
+      "notes": "Tokenized milk / Class III quote TBD."
+    },
+    {
       "symbol": "LEAN",
       "name": "Lean Hogs",
       "mint": null,
@@ -227,6 +367,76 @@
       "icon": "🐷",
       "vibe": "Livestock · protein complex",
       "notes": "Tokenized lean hogs quote TBD."
+    },
+    {
+      "symbol": "CATTLE",
+      "name": "Live Cattle",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_ag",
+      "category": "agriculture",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "🐄",
+      "vibe": "Fed cattle · beef complex",
+      "notes": "Tokenized live cattle quote TBD."
+    },
+    {
+      "symbol": "LBR",
+      "name": "Lumber",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_ag",
+      "category": "agriculture",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "🪵",
+      "vibe": "Softwood · housing cycle",
+      "notes": "Tokenized lumber quote TBD."
+    },
+    {
+      "symbol": "RUB",
+      "name": "Rubber",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_ag",
+      "category": "agriculture",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "🛞",
+      "vibe": "Natural rubber · tire demand",
+      "notes": "Tokenized rubber quote TBD."
+    },
+    {
+      "symbol": "SALT",
+      "name": "Salt",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_ag",
+      "category": "agriculture",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "🧂",
+      "vibe": "Industrial mineral · food & chem",
+      "notes": "Optional tokenized salt quote TBD."
+    },
+    {
+      "symbol": "H2O",
+      "name": "Water Index",
+      "mint": null,
+      "decimals": null,
+      "kind": "tokenized_index",
+      "category": "agriculture",
+      "status": "soon",
+      "enabled": false,
+      "minLiquidityUsd": 0,
+      "icon": "💧",
+      "vibe": "Water rights index · scarcity narrative",
+      "notes": "Optional water index quote TBD."
     }
   ]
 }

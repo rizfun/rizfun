@@ -1,8 +1,6 @@
-/* Riz.Fun — commodities-first launcher UI (frontend only) */
+/* Riz.Fun — commodities directory + create UI (frontend only) */
 (function () {
   "use strict";
-
-  const GRADUATE_USD = 35000;
 
   const FALLBACK_QUOTES = [
     {
@@ -49,20 +47,10 @@
     PAXG: "Tokenized gold · Binance-peg on BSC",
   };
 
-  const SAMPLE_MARKETS = [
-    { name: "Rice Rocket", ticker: "RIZZR", quote: "BNB", mcap: 18200, fee: 2, ageHours: 4, avatar: "RR" },
-    { name: "Gold Grain", ticker: "GGRAIN", quote: "XAUt", mcap: 27400, fee: 1.5, ageHours: 11, avatar: "GG" },
-    { name: "Pax Bowl", ticker: "PBOWL", quote: "PAXG", mcap: 9100, fee: 3, ageHours: 2, avatar: "PB" },
-    { name: "Sticky Hands", ticker: "STICKY", quote: "BNB", mcap: 32100, fee: 1, ageHours: 28, avatar: "SH" },
-    { name: "Auric Rice", ticker: "ARICE", quote: "XAUt", mcap: 14800, fee: 2.5, ageHours: 7, avatar: "AR" },
-    { name: "Chopstick Cat", ticker: "CHOP", quote: "PAXG", mcap: 5600, fee: 2, ageHours: 1, avatar: "CC" },
-    { name: "BNB Bento", ticker: "BENTO", quote: "BNB", mcap: 22100, fee: 1.5, ageHours: 16, avatar: "BB" },
-    { name: "Vault Rice", ticker: "VRICE", quote: "XAUt", mcap: 33900, fee: 1, ageHours: 42, avatar: "VR" },
-  ];
-
   let quotes = FALLBACK_QUOTES.slice();
   let selectedQuote = "BNB";
-  let filterQuote = "ALL";
+  let filterCategory = "ALL";
+  let filterStatus = "ALL";
   let feePct = 2;
 
   function $(sel, root) {
@@ -83,17 +71,6 @@
     return quotes.filter(isLive);
   }
 
-  function formatUsd(n) {
-    if (n >= 1000) return "$" + (n / 1000).toFixed(1).replace(/\.0$/, "") + "k";
-    return "$" + Math.round(n).toLocaleString();
-  }
-
-  function formatAge(hours) {
-    if (hours < 1) return "<1h";
-    if (hours < 24) return hours + "h";
-    return Math.floor(hours / 24) + "d";
-  }
-
   function avatarClass(quote) {
     const q = (quote || "").toLowerCase();
     if (q === "bnb" || q === "xaut" || q === "paxg") return q;
@@ -105,8 +82,9 @@
     if (c === "native" || c === "metals" || c === "energy" || c === "agriculture") return "cat-" + c;
     const sym = ((q && q.symbol) || "").toLowerCase();
     if (sym === "bnb") return "cat-native";
-    if (sym === "xaut" || sym === "paxg" || sym === "xag" || sym === "copper") return "cat-metals";
-    if (sym === "wti" || sym === "ng" || sym === "oil") return "cat-energy";
+    if (["xaut", "paxg", "xag", "xpt", "xpd", "copper", "alu", "iron", "li"].includes(sym))
+      return "cat-metals";
+    if (["wti", "brent", "ng", "coal", "u", "oil"].includes(sym)) return "cat-energy";
     return "cat-agriculture";
   }
 
@@ -116,12 +94,12 @@
     if (c === "metals") return "Metals";
     if (c === "energy") return "Energy";
     if (c === "agriculture") return "Agriculture";
-    return q.kind === "native" ? "Native" : "Commodity";
+    return q && q.kind === "native" ? "Native" : "Commodity";
   }
 
   function quoteIcon(q) {
     if (q && q.icon) return q.icon;
-    return (q && q.symbol ? q.symbol.slice(0, 4) : "?");
+    return q && q.symbol ? q.symbol.slice(0, 4) : "?";
   }
 
   function quoteMeta(symbol) {
@@ -143,6 +121,28 @@
     return q.name || q.symbol;
   }
 
+  function shortDesc(q) {
+    return (q && (q.vibe || q.notes)) || "";
+  }
+
+  function filteredQuotes() {
+    return quotes.filter((q) => {
+      const cat = ((q.category || "").toLowerCase() || "other");
+      const catOk =
+        filterCategory === "ALL" ||
+        (filterCategory === "native" && cat === "native") ||
+        (filterCategory === "metals" && cat === "metals") ||
+        (filterCategory === "energy" && cat === "energy") ||
+        (filterCategory === "agriculture" && cat === "agriculture");
+      const live = isLive(q);
+      const statusOk =
+        filterStatus === "ALL" ||
+        (filterStatus === "live" && live) ||
+        (filterStatus === "soon" && !live);
+      return catOk && statusOk;
+    });
+  }
+
   function showView(id) {
     $all(".view").forEach((v) => v.classList.toggle("active", v.id === "view-" + id));
     $all(".nav-btn[data-view]").forEach((b) =>
@@ -159,17 +159,14 @@
     const q = quotes.find((x) => x.symbol === symbol);
     if (!isLive(q)) return;
     selectedQuote = symbol;
-    filterQuote = symbol;
     renderCreateQuotes();
     updateSummary();
-    renderQuoteFilters();
-    renderCommodityStrip();
-    renderMarkets();
-    renderFeatured();
+    renderCommodityGallery();
+    renderDirectory();
     if (opts.go === "create") {
       showView("create");
-    } else if (opts.go === "markets") {
-      showView("markets");
+    } else if (opts.go === "commodities") {
+      showView("commodities");
     }
   }
 
@@ -180,253 +177,227 @@
     const s = $("#statQuotesSub");
     if (v) v.textContent = String(total);
     if (s) s.textContent = live + " live · " + (total - live) + " soon";
+    const countEl = $("#directoryCount");
+    if (countEl) {
+      const n = filteredQuotes().length;
+      countEl.textContent = n + " of " + total + " commodities";
+    }
+  }
+
+  function commodityCardHtml(q) {
+    const live = isLive(q);
+    const cls = [avatarClass(q.symbol), categoryClass(q), live ? "live" : "soon"]
+      .filter(Boolean)
+      .join(" ");
+    const vibe = shortDesc(q);
+    const badge = live
+      ? '<span class="status-badge live">Live</span>'
+      : '<span class="status-badge soon">Soon</span>';
+    const hint = live
+      ? '<span class="cta-hint">Use in Create →</span>'
+      : '<span class="cta-hint soon-hint">Registry · quote TBD</span>';
+    const tag = live ? "button" : "div";
+    const typeAttr = live ? ' type="button"' : "";
+    const dataAttr = live ? ' data-commodity="' + q.symbol + '"' : ' aria-disabled="true"';
+    return (
+      "<" +
+      tag +
+      typeAttr +
+      ' class="commodity-card ' +
+      cls +
+      '"' +
+      dataAttr +
+      ">" +
+      '<div class="card-top">' +
+      '<div class="icon">' +
+      quoteIcon(q) +
+      "</div>" +
+      badge +
+      "</div>" +
+      '<div class="sym">' +
+      displayName(q) +
+      "</div>" +
+      '<div class="name"><span class="cat-pill">' +
+      categoryLabel(q) +
+      "</span> · " +
+      q.symbol +
+      "</div>" +
+      '<p class="vibe">' +
+      vibe +
+      "</p>" +
+      hint +
+      "</" +
+      tag +
+      ">"
+    );
   }
 
   function renderCommodityGallery() {
     const el = $("#commodityGallery");
     if (!el) return;
-    el.innerHTML = quotes
-      .map((q) => {
-        const live = isLive(q);
-        const cls = [avatarClass(q.symbol), categoryClass(q), live ? "live" : "soon"]
-          .filter(Boolean)
-          .join(" ");
-        const vibe = q.vibe || VIBES[q.symbol] || q.notes || "";
-        const badge = live
-          ? '<span class="status-badge live">Live</span>'
-          : '<span class="status-badge soon">Soon</span>';
-        const hint = live
-          ? '<span class="cta-hint">Filter markets · or create →</span>'
-          : '<span class="cta-hint soon-hint">Registry · quote TBD</span>';
-        const tag = live ? "button" : "div";
-        const typeAttr = live ? ' type="button"' : "";
-        const dataAttr = live ? ' data-commodity="' + q.symbol + '"' : ' aria-disabled="true"';
-        return (
-          "<" +
-          tag +
-          typeAttr +
-          ' class="commodity-card ' +
-          cls +
-          '"' +
-          dataAttr +
-          ">" +
-          '<div class="card-top">' +
-          '<div class="icon">' +
-          quoteIcon(q) +
-          "</div>" +
-          badge +
-          "</div>" +
-          '<div class="sym">' +
-          displayName(q) +
-          "</div>" +
-          '<div class="name"><span class="cat-pill">' +
-          categoryLabel(q) +
-          "</span> · " +
-          q.symbol +
-          "</div>" +
-          '<p class="vibe">' +
-          vibe +
-          "</p>" +
-          hint +
-          "</" +
-          tag +
-          ">"
-        );
-      })
-      .join("");
+    el.innerHTML = quotes.map(commodityCardHtml).join("");
     $all("[data-commodity]", el).forEach((btn) => {
       btn.addEventListener("click", () => {
-        selectCommodity(btn.getAttribute("data-commodity"), { go: "markets" });
+        selectCommodity(btn.getAttribute("data-commodity"), { go: "create" });
       });
     });
   }
 
-  function renderCommodityStrip() {
-    const el = $("#commodityStrip");
-    if (!el) return;
-    el.innerHTML = quotes
-      .map((q) => {
-        const live = isLive(q);
-        const cls = [avatarClass(q.symbol), categoryClass(q), live ? "live" : "soon"]
-          .filter(Boolean)
-          .join(" ");
-        const on = live && filterQuote === q.symbol ? " on" : "";
-        const tag = live ? "button" : "div";
-        const typeAttr = live ? ' type="button"' : "";
-        const dataAttr = live ? ' data-strip="' + q.symbol + '"' : ' aria-disabled="true"';
-        const badge = live ? "" : '<span class="strip-soon">Soon</span>';
-        return (
-          "<" +
-          tag +
-          typeAttr +
-          ' class="strip-card ' +
-          cls +
-          on +
-          '"' +
-          dataAttr +
-          ">" +
-          '<div class="mini">' +
-          quoteIcon(q) +
-          "</div>" +
-          "<div><div class=\"t\">" +
-          displayName(q) +
-          badge +
-          '</div><div class="d">' +
-          categoryLabel(q) +
-          (live ? " · live" : " · soon") +
-          "</div></div></" +
-          tag +
-          ">"
-        );
-      })
-      .join("");
-    $all("[data-strip]", el).forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const sym = btn.getAttribute("data-strip");
-        filterQuote = filterQuote === sym ? "ALL" : sym;
-        selectedQuote = sym;
-        renderCommodityStrip();
-        renderQuoteFilters();
-        renderMarkets();
-        renderCreateQuotes();
-        updateSummary();
+  function renderDirectoryFilters() {
+    const catEl = $("#dirCategoryFilters");
+    const statusEl = $("#dirStatusFilters");
+    if (catEl) {
+      const cats = [
+        ["ALL", "All"],
+        ["native", "Native"],
+        ["metals", "Metals"],
+        ["energy", "Energy"],
+        ["agriculture", "Agriculture"],
+      ];
+      catEl.innerHTML = cats
+        .map(
+          ([id, label]) =>
+            '<button type="button" class="tab' +
+            (filterCategory === id ? " active" : "") +
+            '" data-dir-cat="' +
+            id +
+            '">' +
+            label +
+            "</button>"
+        )
+        .join("");
+      $all("[data-dir-cat]", catEl).forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filterCategory = btn.getAttribute("data-dir-cat");
+          renderDirectoryFilters();
+          renderDirectory();
+          updateCatalogStats();
+        });
       });
-    });
-  }
-
-  function renderQuoteFilters() {
-    const el = $("#quoteFilters");
-    if (!el) return;
-    const enabled = liveQuotes();
-    const bits = [
-      '<button type="button" class="tab' +
-        (filterQuote === "ALL" ? " active" : "") +
-        '" data-filter="ALL">All</button>',
-    ];
-    enabled.forEach((q) => {
-      bits.push(
-        '<button type="button" class="tab' +
-          (filterQuote === q.symbol ? " active" : "") +
-          '" data-filter="' +
-          q.symbol +
-          '">' +
-          q.symbol +
-          "</button>"
-      );
-    });
-    el.innerHTML = bits.join("");
-    $all("[data-filter]", el).forEach((btn) => {
-      btn.addEventListener("click", () => {
-        filterQuote = btn.getAttribute("data-filter");
-        renderQuoteFilters();
-        renderCommodityStrip();
-        renderMarkets();
-      });
-    });
-  }
-
-  function renderMarkets() {
-    const tbody = $("#marketsBody");
-    const label = $("#boardLabel");
-    if (label) {
-      label.textContent =
-        filterQuote === "ALL" ? "All commodities" : "Paired with " + filterQuote;
     }
-    if (!tbody) return;
-    const rows = SAMPLE_MARKETS.filter(
-      (m) => filterQuote === "ALL" || m.quote === filterQuote
-    );
-    if (!rows.length) {
+    if (statusEl) {
+      const statuses = [
+        ["ALL", "All status"],
+        ["live", "Live"],
+        ["soon", "Soon"],
+      ];
+      statusEl.innerHTML = statuses
+        .map(
+          ([id, label]) =>
+            '<button type="button" class="tab' +
+            (filterStatus === id ? " active" : "") +
+            '" data-dir-status="' +
+            id +
+            '">' +
+            label +
+            "</button>"
+        )
+        .join("");
+      $all("[data-dir-status]", statusEl).forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filterStatus = btn.getAttribute("data-dir-status");
+          renderDirectoryFilters();
+          renderDirectory();
+          updateCatalogStats();
+        });
+      });
+    }
+  }
+
+  function renderDirectory() {
+    const tbody = $("#directoryBody");
+    const grid = $("#directoryGrid");
+    const rows = filteredQuotes();
+    updateCatalogStats();
+
+    if (tbody) {
+      if (!rows.length) {
+        tbody.innerHTML =
+          '<tr><td colspan="5" class="empty-cell">No commodities match these filters.</td></tr>';
+      } else {
+        tbody.innerHTML = rows
+          .map((q) => {
+            const live = isLive(q);
+            const badge = live
+              ? '<span class="status-badge live">Live</span>'
+              : '<span class="status-badge soon">Soon</span>';
+            const action = live
+              ? '<button type="button" class="btn btn-ghost btn-sm" data-goto-create-with="' +
+                q.symbol +
+                '">Create</button>'
+              : '<span class="muted-action">Soon</span>';
+            return (
+              "<tr class=\"" +
+              (live ? "row-live" : "row-soon") +
+              "\">" +
+              "<td><div class=\"pair\">" +
+              '<div class="avatar ' +
+              avatarClass(q.symbol) +
+              " " +
+              categoryClass(q) +
+              '">' +
+              quoteIcon(q) +
+              "</div>" +
+              "<div><div class=\"name\">" +
+              displayName(q) +
+              '</div><div class="sym mono">' +
+              categoryLabel(q) +
+              "</div></div></div></td>" +
+              '<td class="mono">' +
+              q.symbol +
+              "</td>" +
+              "<td><span class=\"cat-pill\">" +
+              categoryLabel(q) +
+              "</span></td>" +
+              "<td>" +
+              badge +
+              "</td>" +
+              '<td class="desc-cell">' +
+              shortDesc(q) +
+              '</td>' +
+              "<td>" +
+              action +
+              "</td>" +
+              "</tr>"
+            );
+          })
+          .join("");
+        $all("[data-goto-create-with]", tbody).forEach((btn) => {
+          btn.addEventListener("click", () => {
+            selectCommodity(btn.getAttribute("data-goto-create-with"), { go: "create" });
+          });
+        });
+      }
+    }
+
+    if (grid) {
+      grid.innerHTML = rows.map(commodityCardHtml).join("");
+      $all("[data-commodity]", grid).forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectCommodity(btn.getAttribute("data-commodity"), { go: "create" });
+        });
+      });
+    }
+  }
+
+  function renderLaunchesEmpty() {
+    const tbody = $("#launchesBody");
+    if (tbody) {
       tbody.innerHTML =
-        '<tr><td colspan="7" style="color:var(--muted);padding:28px;text-align:center">No markets for this commodity yet.</td></tr>';
-      return;
+        '<tr><td colspan="5" class="empty-cell">No launches yet</td></tr>';
     }
-    tbody.innerHTML = rows
-      .map((m, i) => {
-        const pct = Math.min(100, Math.round((m.mcap / GRADUATE_USD) * 100));
-        const qCls = m.quote.toLowerCase();
-        return (
-          "<tr>" +
-          '<td class="mono">' +
-          String(i + 1).padStart(2, "0") +
-          "</td>" +
-          "<td><div class=\"pair\">" +
-          '<div class="avatar ' +
-          avatarClass(m.quote) +
-          '">' +
-          m.avatar +
-          "</div>" +
-          "<div><div class=\"name\">" +
-          m.name +
-          '</div><div class="sym mono">$' +
-          m.ticker +
-          "</div></div></div></td>" +
-          '<td><span class="pill quote-' +
-          qCls +
-          '">' +
-          (m.quote === "BNB" ? "🍚 BNB" : "✦ " + m.quote) +
-          "</span></td>" +
-          '<td class="mcap-cell"><div class="mono">' +
-          formatUsd(m.mcap) +
-          '</div><div class="progress"><i style="width:' +
-          pct +
-          '%"></i></div>' +
-          '<div class="mcap-meta"><span>' +
-          pct +
-          "%</span><span>→ " +
-          formatUsd(GRADUATE_USD) +
-          "</span></div></td>" +
-          '<td class="mono">' +
-          m.fee.toFixed(1) +
-          "%</td>" +
-          '<td class="mono">' +
-          formatAge(m.ageHours) +
-          "</td>" +
-          '<td><button type="button" class="btn btn-ghost btn-sm" data-goto-create-with="' +
-          m.quote +
-          '">Pair</button></td>' +
-          "</tr>"
-        );
-      })
-      .join("");
-    $all("[data-goto-create-with]", tbody).forEach((btn) => {
-      btn.addEventListener("click", () => {
-        selectCommodity(btn.getAttribute("data-goto-create-with"), { go: "create" });
+    const featured = $("#featuredLaunches");
+    if (featured) {
+      featured.innerHTML =
+        '<div class="empty-state"><p class="empty-title">No launches yet</p><p class="empty-sub">When the protocol ships, new commodity-paired launches will appear here.</p><button type="button" class="btn btn-primary btn-sm" data-goto="create">Create a launch</button></div>';
+      $all("[data-goto]", featured).forEach((el) => {
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          const id = el.getAttribute("data-goto");
+          if (id) showView(id);
+        });
       });
-    });
-  }
-
-  function renderFeatured() {
-    const el = $("#featuredMarkets");
-    if (!el) return;
-    const rows = SAMPLE_MARKETS.slice(0, 4);
-    el.innerHTML = rows
-      .map((m) => {
-        const pct = Math.min(100, Math.round((m.mcap / GRADUATE_USD) * 100));
-        return (
-          '<div class="m-card">' +
-          '<div class="avatar ' +
-          avatarClass(m.quote) +
-          '">' +
-          m.avatar +
-          "</div>" +
-          '<div class="meta"><div class="name">' +
-          m.name +
-          '</div><div class="sym mono">$' +
-          m.ticker +
-          ' · <span class="pill quote-' +
-          m.quote.toLowerCase() +
-          '" style="margin-left:4px">' +
-          m.quote +
-          "</span></div></div>" +
-          '<div class="right"><div class="mcap mono">' +
-          formatUsd(m.mcap) +
-          '</div><div class="pct">' +
-          pct +
-          "% to graduate</div></div></div>"
-        );
-      })
-      .join("");
+    }
   }
 
   function renderCreateQuotes() {
@@ -556,8 +527,8 @@
       });
     });
     const hash = (location.hash || "#home").replace("#", "");
-    const allowed = ["home", "markets", "create", "about"];
-    const legacy = { commodities: "home" };
+    const allowed = ["home", "commodities", "create", "about"];
+    const legacy = { markets: "commodities", launches: "commodities" };
     const resolved = legacy[hash] || hash;
     showView(allowed.includes(resolved) ? resolved : "home");
     window.addEventListener("hashchange", () => {
@@ -592,10 +563,9 @@
     await loadQuotes();
     updateCatalogStats();
     renderCommodityGallery();
-    renderCommodityStrip();
-    renderQuoteFilters();
-    renderMarkets();
-    renderFeatured();
+    renderDirectoryFilters();
+    renderDirectory();
+    renderLaunchesEmpty();
     renderCreateQuotes();
     updateSummary();
   }

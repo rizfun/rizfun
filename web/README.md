@@ -2,7 +2,7 @@
 
 Static HTML/CSS/JS for **Riz.Fun** (`$RIZ`, rice + rizz) on **BNB Chain**.
 
-Commodities-first launcher UI: pair memes with **BNB**, **XAUt**, and **PAXG**.
+Commodities-first launcher UI: pair memes against a **commodity quote directory** (gold, silver, oil, wheat, corn, coffee…). Day-1 live quotes: **BNB**, **XAUt**, **PAXG**.
 
 ## Open locally
 
@@ -17,15 +17,19 @@ Open http://127.0.0.1:8765/
 
 | Tab | What |
 |-----|------|
-| **Home** | Hero + commodities gallery + featured markets |
-| **Markets** | Board filtered by commodity; pair badge prominent |
-| **Create** | Step 1 = commodity picker, then token details; summary headlines the pair |
+| **Home** | Hero + commodities directory gallery + empty launches |
+| **Commodities** | Full quote-asset directory (table + grid); Live / Soon; launches board empty |
+| **Create** | Live commodity picker (BNB / XAUt / PAXG) + token details |
 | **How it works** | Pair → curve (~$5k→~$35k) → locked Uniswap v4; fee split 40/30/30 |
 
 ## Assets
 
 - Locked logo: `assets/rizfun-logo.png`
-- Quote registry: `commodities.json`
+- Quote registry: `commodities.json` (~30 CME-style softs / metals / energy)
+
+## Honest empty state
+
+No fake sample memecoins. Launches board shows **No launches yet** until the protocol ships.
 
 ## Deploy
 

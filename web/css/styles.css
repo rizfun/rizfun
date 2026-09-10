@@ -447,3 +447,25 @@ footer{padding:32px 0 48px;color:var(--dim);font-size:.82rem;border-top:1px soli
   font-weight:600;cursor:pointer;padding:6px 10px;border-radius:8px;
 }
 .linkish:hover{color:var(--text);background:rgba(255,255,255,.04)}
+
+/* DIRECTORY TABLE + EMPTY STATES */
+.directory-table{min-width:860px}
+.directory-table .desc-cell{
+  color:var(--muted);font-size:.82rem;line-height:1.35;max-width:280px;
+}
+.directory-table .row-soon td{opacity:.88}
+.empty-cell{
+  color:var(--muted) !important;padding:36px 20px !important;text-align:center !important;
+  font-size:.95rem;
+}
+.empty-state{
+  text-align:center;padding:40px 24px;
+  background:var(--panel);border:1px dashed var(--line);border-radius:18px;
+}
+.empty-title{margin:0 0 8px;font-size:1.15rem;font-weight:700;color:var(--text)}
+.empty-sub{margin:0 0 18px;color:var(--muted);font-size:.9rem;line-height:1.45}
+.muted-action{color:var(--dim);font-size:.78rem;font-weight:600}
+.avatar.cat-metals{background:linear-gradient(145deg,#2a3340,#1a212c);color:var(--gold2);font-size:1rem}
+.avatar.cat-energy{background:linear-gradient(145deg,#2a3340,#1a212c);color:#ffb074;font-size:1rem}
+.avatar.cat-agriculture{background:linear-gradient(145deg,#2a3340,#1a212c);color:var(--rice);font-size:1rem}
+.avatar.cat-native{background:linear-gradient(145deg,#f3ba2f,#8a6a10);color:#1a1400;font-size:1rem}
