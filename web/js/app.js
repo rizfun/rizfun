@@ -313,7 +313,7 @@
     if (tbody) {
       if (!rows.length) {
         tbody.innerHTML =
-          '<tr><td colspan="5" class="empty-cell">No commodities match these filters.</td></tr>';
+          '<tr><td colspan="6" class="empty-cell">No commodities match these filters.</td></tr>';
       } else {
         tbody.innerHTML = rows
           .map((q) => {
