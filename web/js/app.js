@@ -11,7 +11,10 @@
       mint: "0x0000000000000000000000000000000000000000",
       decimals: 18,
       kind: "native",
+      category: "native",
+      status: "live",
       enabled: true,
+      icon: "🍚",
       vibe: "Native gas · rice narrative on BSC",
     },
     {
@@ -20,7 +23,10 @@
       mint: "0x21cAef8A43163Eea865baeE23b9C2E327696A3bf",
       decimals: 6,
       kind: "tokenized_gold",
+      category: "metals",
+      status: "live",
       enabled: true,
+      icon: "✦",
       vibe: "Tokenized gold · soft auric pair",
     },
     {
@@ -29,7 +35,10 @@
       mint: "0x7950865a9140cb519342433146ed5b40c6f210f7",
       decimals: 18,
       kind: "tokenized_gold",
+      category: "metals",
+      status: "live",
       enabled: true,
+      icon: "◈",
       vibe: "Tokenized gold · Binance-peg on BSC",
     },
   ];
@@ -63,6 +72,17 @@
     return Array.from((root || document).querySelectorAll(sel));
   }
 
+  function isLive(q) {
+    if (!q) return false;
+    if (q.status === "live") return true;
+    if (q.status === "soon") return false;
+    return q.enabled !== false;
+  }
+
+  function liveQuotes() {
+    return quotes.filter(isLive);
+  }
+
   function formatUsd(n) {
     if (n >= 1000) return "$" + (n / 1000).toFixed(1).replace(/\.0$/, "") + "k";
     return "$" + Math.round(n).toLocaleString();
@@ -80,6 +100,30 @@
     return "";
   }
 
+  function categoryClass(q) {
+    const c = ((q && q.category) || "").toLowerCase();
+    if (c === "native" || c === "metals" || c === "energy" || c === "agriculture") return "cat-" + c;
+    const sym = ((q && q.symbol) || "").toLowerCase();
+    if (sym === "bnb") return "cat-native";
+    if (sym === "xaut" || sym === "paxg" || sym === "xag" || sym === "copper") return "cat-metals";
+    if (sym === "wti" || sym === "ng" || sym === "oil") return "cat-energy";
+    return "cat-agriculture";
+  }
+
+  function categoryLabel(q) {
+    const c = ((q && q.category) || "").toLowerCase();
+    if (c === "native") return "Native";
+    if (c === "metals") return "Metals";
+    if (c === "energy") return "Energy";
+    if (c === "agriculture") return "Agriculture";
+    return q.kind === "native" ? "Native" : "Commodity";
+  }
+
+  function quoteIcon(q) {
+    if (q && q.icon) return q.icon;
+    return (q && q.symbol ? q.symbol.slice(0, 4) : "?");
+  }
+
   function quoteMeta(symbol) {
     const q = quotes.find((x) => x.symbol === symbol);
     return {
@@ -87,10 +131,12 @@
       name: (q && q.name) || symbol,
       vibe: (q && (q.vibe || q.notes)) || VIBES[symbol] || "",
       kind: (q && q.kind) || "",
+      category: (q && q.category) || "",
     };
   }
 
   function displayName(q) {
+    if (!q) return "";
     if (q.symbol === "BNB") return "BNB";
     if (q.symbol === "XAUt") return "Gold (XAUt)";
     if (q.symbol === "PAXG") return "Gold (PAXG)";
@@ -110,6 +156,8 @@
 
   function selectCommodity(symbol, opts) {
     opts = opts || {};
+    const q = quotes.find((x) => x.symbol === symbol);
+    if (!isLive(q)) return;
     selectedQuote = symbol;
     filterQuote = symbol;
     renderCreateQuotes();
@@ -125,34 +173,64 @@
     }
   }
 
+  function updateCatalogStats() {
+    const live = liveQuotes().length;
+    const total = quotes.length;
+    const v = $("#statQuotesValue");
+    const s = $("#statQuotesSub");
+    if (v) v.textContent = String(total);
+    if (s) s.textContent = live + " live · " + (total - live) + " soon";
+  }
+
   function renderCommodityGallery() {
     const el = $("#commodityGallery");
     if (!el) return;
-    const enabled = quotes.filter((q) => q.enabled !== false);
-    el.innerHTML = enabled
+    el.innerHTML = quotes
       .map((q) => {
-        const cls = avatarClass(q.symbol);
+        const live = isLive(q);
+        const cls = [avatarClass(q.symbol), categoryClass(q), live ? "live" : "soon"]
+          .filter(Boolean)
+          .join(" ");
         const vibe = q.vibe || VIBES[q.symbol] || q.notes || "";
+        const badge = live
+          ? '<span class="status-badge live">Live</span>'
+          : '<span class="status-badge soon">Soon</span>';
+        const hint = live
+          ? '<span class="cta-hint">Filter markets · or create →</span>'
+          : '<span class="cta-hint soon-hint">Registry · quote TBD</span>';
+        const tag = live ? "button" : "div";
+        const typeAttr = live ? ' type="button"' : "";
+        const dataAttr = live ? ' data-commodity="' + q.symbol + '"' : ' aria-disabled="true"';
         return (
-          '<button type="button" class="commodity-card ' +
+          "<" +
+          tag +
+          typeAttr +
+          ' class="commodity-card ' +
           cls +
-          '" data-commodity="' +
-          q.symbol +
-          '">' +
+          '"' +
+          dataAttr +
+          ">" +
+          '<div class="card-top">' +
           '<div class="icon">' +
-          q.symbol.slice(0, 4) +
+          quoteIcon(q) +
+          "</div>" +
+          badge +
           "</div>" +
           '<div class="sym">' +
           displayName(q) +
           "</div>" +
-          '<div class="name">' +
-          (q.kind === "native" ? "Native quote" : "Tokenized gold") +
+          '<div class="name"><span class="cat-pill">' +
+          categoryLabel(q) +
+          "</span> · " +
+          q.symbol +
           "</div>" +
           '<p class="vibe">' +
           vibe +
           "</p>" +
-          '<span class="cta-hint">Filter markets · or create →</span>' +
-          "</button>"
+          hint +
+          "</" +
+          tag +
+          ">"
         );
       })
       .join("");
@@ -166,26 +244,39 @@
   function renderCommodityStrip() {
     const el = $("#commodityStrip");
     if (!el) return;
-    const enabled = quotes.filter((q) => q.enabled !== false);
-    el.innerHTML = enabled
+    el.innerHTML = quotes
       .map((q) => {
-        const cls = avatarClass(q.symbol);
-        const on = filterQuote === q.symbol ? " on" : "";
+        const live = isLive(q);
+        const cls = [avatarClass(q.symbol), categoryClass(q), live ? "live" : "soon"]
+          .filter(Boolean)
+          .join(" ");
+        const on = live && filterQuote === q.symbol ? " on" : "";
+        const tag = live ? "button" : "div";
+        const typeAttr = live ? ' type="button"' : "";
+        const dataAttr = live ? ' data-strip="' + q.symbol + '"' : ' aria-disabled="true"';
+        const badge = live ? "" : '<span class="strip-soon">Soon</span>';
         return (
-          '<button type="button" class="strip-card ' +
+          "<" +
+          tag +
+          typeAttr +
+          ' class="strip-card ' +
           cls +
           on +
-          '" data-strip="' +
-          q.symbol +
-          '">' +
+          '"' +
+          dataAttr +
+          ">" +
           '<div class="mini">' +
-          q.symbol.slice(0, 4) +
+          quoteIcon(q) +
           "</div>" +
           "<div><div class=\"t\">" +
           displayName(q) +
+          badge +
           '</div><div class="d">' +
-          (q.kind === "native" ? "Rice · native" : "Gold quote") +
-          "</div></div></button>"
+          categoryLabel(q) +
+          (live ? " · live" : " · soon") +
+          "</div></div></" +
+          tag +
+          ">"
         );
       })
       .join("");
@@ -206,7 +297,7 @@
   function renderQuoteFilters() {
     const el = $("#quoteFilters");
     if (!el) return;
-    const enabled = quotes.filter((q) => q.enabled !== false);
+    const enabled = liveQuotes();
     const bits = [
       '<button type="button" class="tab' +
         (filterQuote === "ALL" ? " active" : "") +
@@ -341,7 +432,7 @@
   function renderCreateQuotes() {
     const el = $("#quotePicker");
     if (!el) return;
-    const enabled = quotes.filter((q) => q.enabled !== false);
+    const enabled = liveQuotes();
     if (!enabled.find((q) => q.symbol === selectedQuote) && enabled[0]) {
       selectedQuote = enabled[0].symbol;
     }
@@ -358,7 +449,7 @@
           q.symbol +
           '">' +
           '<div class="icon-sm">' +
-          q.symbol.slice(0, 4) +
+          quoteIcon(q) +
           "</div>" +
           '<div class="t">' +
           displayName(q) +
@@ -484,6 +575,8 @@
       if (data && Array.isArray(data.quotes) && data.quotes.length) {
         quotes = data.quotes.map((q) => ({
           ...q,
+          status: q.status || (q.enabled === false ? "soon" : "live"),
+          category: q.category || (q.kind === "native" ? "native" : "metals"),
           vibe: q.vibe || VIBES[q.symbol] || q.notes || "",
         }));
       }
@@ -497,6 +590,7 @@
     setupNav();
     setupCreateForm();
     await loadQuotes();
+    updateCatalogStats();
     renderCommodityGallery();
     renderCommodityStrip();
     renderQuoteFilters();
