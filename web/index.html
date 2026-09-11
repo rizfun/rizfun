@@ -3,13 +3,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Riz.Fun · Commodity-paired launches on BSC</title>
-<meta name="description" content="Riz.Fun — commodity-paired memecoin launches on BNB Chain. Quote directory: gold, silver, oil, wheat, corn, coffee and more. Day-1 live BNB · XAUt · PAXG."/>
-<meta name="theme-color" content="#07080a"/>
+<title>Riz.Fun · Memes that pair with commodities. On BNB.</title>
+<meta name="description" content="Riz.Fun — commodity-paired memecoin launches on BNB Chain. Memes that pair with commodities. Directory: gold, silver, oil, wheat, corn, coffee and more. Live BNB · XAUt · PAXG. @RizForFun"/>
+<meta name="theme-color" content="#000000"/>
+<meta property="og:title" content="Riz.Fun · Memes that pair with commodities. On BNB."/>
+<meta property="og:description" content="Commodity-paired launches on BNB Chain. Rice + rizz. @RizForFun"/>
+<meta property="og:image" content="assets/rizfun-banner.png"/>
 <link rel="icon" type="image/png" href="assets/rizfun-logo.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
@@ -17,12 +20,14 @@
 
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track mono">
-    <span>RIZ.FUN · RICE + RIZZ · BSC</span>
-    <span>COMMODITIES DIRECTORY · LIVE BNB · XAUt · PAXG · REGISTRY EXPANDING</span>
+    <span>RIZ.FUN · MEMES THAT PAIR WITH COMMODITIES · ON BNB</span>
+    <span>@RIZFORFUN · RICE + RIZZ · HARD CREAM / BLACK</span>
+    <span>DIRECTORY · LIVE BNB · XAUt · PAXG · REGISTRY EXPANDING</span>
     <span>CURVE · ~$5k → ~$35k · THEN LOCKED V4</span>
     <span>FEE · 40% HOLDERS · 30% BUYBACK $RIZ · 30% PROTOCOL</span>
-    <span>RIZ.FUN · RICE + RIZZ · BSC</span>
-    <span>COMMODITIES DIRECTORY · LIVE BNB · XAUt · PAXG · REGISTRY EXPANDING</span>
+    <span>RIZ.FUN · MEMES THAT PAIR WITH COMMODITIES · ON BNB</span>
+    <span>@RIZFORFUN · RICE + RIZZ · HARD CREAM / BLACK</span>
+    <span>DIRECTORY · LIVE BNB · XAUt · PAXG · REGISTRY EXPANDING</span>
     <span>CURVE · ~$5k → ~$35k · THEN LOCKED V4</span>
     <span>FEE · 40% HOLDERS · 30% BUYBACK $RIZ · 30% PROTOCOL</span>
   </div>
@@ -31,7 +36,7 @@
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#home" data-goto="home">
-      <img class="brand-logo" src="assets/rizfun-logo.png" alt="Riz.Fun" width="36" height="36"/>
+      <img class="brand-logo" src="assets/rizfun-logo.png" alt="Riz.Fun" width="40" height="40"/>
       <span class="brand-name">RIZ<span>.FUN</span></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
@@ -49,24 +54,31 @@
   <!-- HOME -->
   <section class="view" id="view-home">
     <div class="hero">
-      <div class="kicker mono">BNB CHAIN · COMMODITY QUOTE DIRECTORY</div>
-      <h1>Memes that <em>pair</em> with <span>real commodities</span></h1>
-      <p class="lead">
-        Riz.Fun launches coins against a growing commodity catalog —
-        day-1 live quotes <strong>BNB</strong>, <strong>gold (XAUt)</strong>, and <strong>gold (PAXG)</strong>,
-        plus metals, energy, and agriculture on the registry (silver, oil, wheat, corn, coffee…).
-        Rice narrative, soft gold accents, bonding curve to a locked Uniswap v4 pool.
-        Commodities are the product. $RIZ is the protocol token.
-      </p>
-      <div class="hero-cta">
-        <button type="button" class="btn btn-primary" data-goto="create">Launch with a commodity</button>
-        <button type="button" class="btn btn-ghost" data-goto="commodities">Browse commodities</button>
+      <div class="hero-copy">
+        <div class="kicker mono">BNB CHAIN · COMMODITY QUOTE DIRECTORY</div>
+        <h1>Memes that <em>pair</em> with <span>commodities</span></h1>
+        <p class="hero-handle mono">On BNB · <a href="https://x.com/RizForFun" target="_blank" rel="noopener">@RizForFun</a></p>
+        <p class="lead">
+          Riz.Fun launches coins against a growing commodity catalog —
+          day-1 live quotes <strong>BNB</strong>, <strong>gold (XAUt)</strong>, and <strong>gold (PAXG)</strong>,
+          plus metals, energy, and agriculture on the registry.
+          Bonding curve to a locked Uniswap v4 pool.
+          Commodities are the product. <strong>$RIZ</strong> is the protocol token.
+        </p>
+        <div class="hero-cta">
+          <button type="button" class="btn btn-primary" data-goto="create">Launch with a commodity</button>
+          <button type="button" class="btn btn-ghost" data-goto="commodities">Browse commodities</button>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="l">Chain</div><div class="v">BSC</div><div class="s">BNB Chain</div></div>
+          <div class="stat"><div class="l">Quotes</div><div class="v" id="statQuotesValue">31</div><div class="s" id="statQuotesSub">3 live · expanding registry</div></div>
+          <div class="stat"><div class="l">Curve</div><div class="v">$5k→$35k</div><div class="s">then locked v4</div></div>
+          <div class="stat"><div class="l">Token</div><div class="v">$RIZ</div><div class="s">buyback leg</div></div>
+        </div>
       </div>
-      <div class="stats">
-        <div class="stat"><div class="l">Chain</div><div class="v">BSC</div><div class="s">BNB Chain</div></div>
-        <div class="stat"><div class="l">Quotes</div><div class="v" id="statQuotesValue">31</div><div class="s" id="statQuotesSub">3 live · expanding registry</div></div>
-        <div class="stat"><div class="l">Curve</div><div class="v">$5k→$35k</div><div class="s">then locked v4</div></div>
-        <div class="stat"><div class="l">Token</div><div class="v">$RIZ</div><div class="s">buyback leg</div></div>
+      <div class="hero-visual" aria-hidden="false">
+        <img src="assets/rizfun-banner.png" alt="Riz.Fun — cream rice grains in block sunglasses marching from the bowl"/>
+        <div class="hero-badge">Rice + rizz</div>
       </div>
     </div>
 
@@ -98,7 +110,7 @@
       <div class="section-h">
         <div>
           <h2>Commodities</h2>
-          <p>Full quote-asset directory — metals, energy, agriculture, native. Like a commodities.market list for pairing.</p>
+          <p>Full quote-asset directory — metals, energy, agriculture, native. Pair your meme against real commodities.</p>
         </div>
         <div class="tabs" id="dirStatusFilters"></div>
       </div>
@@ -202,11 +214,11 @@
             <div class="row2">
               <div>
                 <label for="tokName">Name</label>
-                <input id="tokName" name="name" placeholder="e.g. Auric Pulse" maxlength="32" required/>
+                <input id="tokName" name="name" placeholder="e.g. Bowl Run" maxlength="32" required/>
               </div>
               <div>
                 <label for="tokTicker">Ticker</label>
-                <input id="tokTicker" name="ticker" placeholder="e.g. AURIC" maxlength="10" required/>
+                <input id="tokTicker" name="ticker" placeholder="e.g. BOWL" maxlength="10" required/>
               </div>
             </div>
             <label for="feeRange">Trading fee <span class="hint">(1–3%)</span></label>
@@ -275,7 +287,7 @@
         <div class="step">
           <div class="n">01</div>
           <h3>Pair with a commodity</h3>
-          <p>Day-1 live quotes: BNB, XAUt, PAXG. Your meme bonds against that quote — gold or rice energy from day one. The directory lists metals, energy, and agriculture as Soon until mints land.</p>
+          <p>Day-1 live quotes: BNB, XAUt, PAXG. Your meme bonds against that quote from day one. The directory lists metals, energy, and agriculture as Soon until mints land.</p>
         </div>
         <div class="step">
           <div class="n">02</div>
@@ -316,19 +328,19 @@
       <div class="section-h">
         <div>
           <h2>About Riz.Fun</h2>
-          <p>Rice + rizz · commodities-first · CT English · BSC.</p>
+          <p>Rice + rizz · commodities-first · CT English · BSC · <a href="https://x.com/RizForFun" target="_blank" rel="noopener">@RizForFun</a></p>
         </div>
       </div>
       <div class="how">
         <div class="step">
           <div class="n">BRAND</div>
           <h3>Rice + rizz</h3>
-          <p>Humor meets premium dark CT. Soft gold and cream accents. Protocol token <strong>$RIZ</strong>.</p>
+          <p>Hard cream rice-grain with block sunglasses. Pure black + cream. Protocol token <strong>$RIZ</strong>. Memes that pair with commodities.</p>
         </div>
         <div class="step">
           <div class="n">QUOTES</div>
           <h3>Directory + live mints</h3>
-          <p>Live: BNB, XAUt, PAXG. The directory tracks a full CME-style softs / metals / energy list as Soon — no fake sample memecoins. See <span class="mono">commodities.json</span>.</p>
+          <p>Live: BNB, XAUt, PAXG. The directory tracks a full softs / metals / energy list as Soon — no fake sample memecoins. See <span class="mono">commodities.json</span>.</p>
         </div>
         <div class="step">
           <div class="n">SCOPE</div>
@@ -343,10 +355,10 @@
 <footer>
   <div class="wrap footer-inner">
     <div class="footer-brand">
-      <img src="assets/rizfun-logo.png" alt="" width="28" height="28"/>
+      <img src="assets/rizfun-logo.png" alt="" width="32" height="32"/>
       <div>
         <div class="footer-name">Riz.Fun</div>
-        <div class="footer-sub mono">$RIZ · BSC · rice + rizz</div>
+        <div class="footer-sub mono">$RIZ · BSC · @RizForFun</div>
       </div>
     </div>
     <div class="footer-links">
@@ -354,6 +366,7 @@
       <button type="button" class="linkish" data-goto="commodities">Commodities</button>
       <button type="button" class="linkish" data-goto="create">Create</button>
       <button type="button" class="linkish" data-goto="about">How it works</button>
+      <a class="linkish" href="https://x.com/RizForFun" target="_blank" rel="noopener">X</a>
     </div>
   </div>
 </footer>

@@ -25,7 +25,7 @@
       status: "live",
       enabled: true,
       icon: "✦",
-      vibe: "Tokenized gold · soft auric pair",
+      vibe: "Tokenized gold · XAUt pair on BSC",
     },
     {
       symbol: "PAXG",
@@ -43,7 +43,7 @@
 
   const VIBES = {
     BNB: "Native gas · rice narrative on BSC",
-    XAUt: "Tokenized gold · soft auric pair",
+    XAUt: "Tokenized gold · XAUt pair on BSC",
     PAXG: "Tokenized gold · Binance-peg on BSC",
   };
 
