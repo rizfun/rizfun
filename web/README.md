@@ -21,7 +21,7 @@ Open http://127.0.0.1:8765/
 
 | Tab | What |
 |-----|------|
-| **Home** | Hero (logo + banner) + commodities gallery + empty launches |
+| **Home** | Hero (text-only) + commodities gallery + empty launches |
 | **Commodities** | Full quote-asset directory (table + grid); Live / Soon |
 | **Create** | Live commodity picker (BNB / XAUt / PAXG) + token details |
 | **How it works** | Pair → curve (~$5k→~$35k) → locked Uniswap v4; fee split 40/30/30 |
@@ -29,7 +29,7 @@ Open http://127.0.0.1:8765/
 ## Assets
 
 - Locked hard logo: `assets/rizfun-logo.png`
-- Banner (bowl march): `assets/rizfun-banner.png`
+- Optional brand banner (not shown on homepage): `assets/rizfun-banner.png`
 - Quote registry: `commodities.json` (~31 CME-style softs / metals / energy)
 
 ## Honest empty state

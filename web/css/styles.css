@@ -109,17 +109,14 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 .view{display:none;padding-bottom:56px}
 .view.active{display:block}
 
-/* HERO */
+/* HERO — text-only (logo stays in nav/footer; no bowl-march banner) */
 .hero{
   padding:40px 0 36px;
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:36px;
-  align-items:center;
+  display:block;
+  max-width:52rem;
 }
 @media(max-width:900px){
-  .hero{grid-template-columns:1fr;gap:28px;padding:32px 0 28px}
-  .hero-visual{order:-1}
+  .hero{padding:32px 0 28px}
 }
 .hero-copy{min-width:0}
 .kicker{
@@ -133,7 +130,7 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   font-family:var(--font);
   font-weight:900;
   font-size:clamp(2.35rem,5.2vw,3.55rem);
-  line-height:1.02;letter-spacing:-.035em;max-width:14ch;
+  line-height:1.02;letter-spacing:-.035em;max-width:18ch;
   color:var(--cream);
 }
 .hero h1 em{font-style:normal;color:var(--text-bright);border-bottom:3px solid var(--cream)}
@@ -146,24 +143,6 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 }
 .hero-handle a{color:var(--cream);font-weight:800}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
-.hero-visual{
-  position:relative;
-  border:var(--border-thick) solid var(--cream);
-  border-radius:var(--radius-lg);
-  background:#000;
-  overflow:hidden;
-  box-shadow:6px 6px 0 var(--cream);
-  aspect-ratio:16/10;
-}
-.hero-visual img{
-  width:100%;height:100%;object-fit:cover;object-position:center;display:block;
-}
-.hero-visual .hero-badge{
-  position:absolute;left:14px;bottom:14px;
-  background:var(--cream);color:var(--ink);
-  font-weight:900;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
-  padding:8px 12px;border:var(--border) solid var(--ink);border-radius:var(--radius);
-}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 @media(max-width:760px){
   .stats{grid-template-columns:repeat(2,1fr)}
