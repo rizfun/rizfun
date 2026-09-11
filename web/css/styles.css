@@ -145,41 +145,80 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   line-height:1.35;
 }
 
-/* RIGHT STAGE — walk once → glasses on → fade → tagline holds */
+/* RIGHT STAGE — open black (NO card) · logo grain + stick arms · walk → glasses on → fade → tagline */
 .hero-stage{
   min-width:0;
   display:flex;
   align-items:center;
   justify-content:center;
+  background:transparent;
 }
 .riz-stage{
   position:relative;
   width:100%;
-  max-width:340px;
+  max-width:400px;
   aspect-ratio:1 / 1.05;
   margin:0 auto;
-  border:var(--border) solid var(--cream);
-  border-radius:var(--radius-lg);
-  background:#000;
-  overflow:hidden;
-  box-shadow:var(--shadow-sm);
+  border:0;
+  border-radius:0;
+  background:transparent;
+  overflow:visible;
+  box-shadow:none;
 }
 .riz-actor{
   position:absolute;
   inset:0;
   display:grid;
   place-items:center;
-  animation:rizActor 6.2s cubic-bezier(.22,.7,.2,1) forwards;
+  animation:rizActor 7.6s cubic-bezier(.45,.05,.25,1) forwards;
   will-change:transform,opacity;
 }
-.riz-svg{width:min(72%,220px);height:auto;display:block;overflow:visible}
-.riz-hand{
-  transform-origin:148px 168px;
-  animation:rizHand 6.2s cubic-bezier(.22,.7,.2,1) forwards;
+.riz-figure{
+  position:relative;
+  width:min(78%,280px);
+  aspect-ratio:1;
+}
+.riz-body{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  pointer-events:none;
+  user-select:none;
+  z-index:2;
+}
+.riz-limbs{
+  position:absolute;
+  inset:-8% -12%;
+  width:124%;
+  height:124%;
+  overflow:visible;
+  z-index:1;
+}
+.riz-arm-l{
+  transform-origin:72px 118px;
+  animation:rizArmL 7.6s cubic-bezier(.45,.05,.25,1) forwards;
+}
+.riz-arm-r{
+  transform-origin:128px 118px;
+  animation:rizArmR 7.6s cubic-bezier(.45,.05,.25,1) forwards;
+}
+.riz-glasses-svg{
+  position:absolute;
+  left:50%;
+  top:42%;
+  width:92%;
+  height:auto;
+  transform:translate(-50%,-50%);
+  overflow:visible;
+  z-index:3;
+  pointer-events:none;
 }
 .riz-glasses{
-  transform-origin:100px 114px;
-  animation:rizGlasses 6.2s cubic-bezier(.22,.7,.2,1) forwards;
+  transform-origin:100px 40px;
+  animation:rizGlasses 7.6s cubic-bezier(.45,.05,.25,1) forwards;
 }
 .riz-tagline{
   position:absolute;
@@ -187,56 +226,84 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   margin:0;
   display:grid;
   place-items:center;
-  padding:24px 20px;
+  padding:24px 18px;
   text-align:center;
   font-family:var(--font);
   font-weight:900;
-  font-size:clamp(1.55rem,3.2vw,2.15rem);
+  font-size:clamp(1.55rem,3.2vw,2.2rem);
   line-height:1.12;
   letter-spacing:-.03em;
   color:var(--cream);
   opacity:0;
   pointer-events:none;
-  animation:rizTagline 6.2s ease forwards;
+  animation:rizTagline 7.6s ease forwards;
 }
 
-/* 0–45%: enter from right with bob, glasses held low-right
-   45–62%: put sunglasses on face
-   62–78%: hold locked logo pose
-   78–90%: character fades
-   88–100%: tagline in, then hold forever */
 @keyframes rizActor{
-  0%{transform:translate(118%,8%) scale(.92);opacity:0}
-  8%{opacity:1}
-  12%{transform:translate(86%,2%) scale(.95)}
-  22%{transform:translate(58%,7%) scale(.97)}
-  32%{transform:translate(32%,1%) scale(.99)}
-  42%{transform:translate(8%,5%) scale(1)}
-  48%{transform:translate(0,0) scale(1)}
-  76%{transform:translate(0,0) scale(1);opacity:1}
-  90%,100%{transform:translate(0,-6%) scale(.98);opacity:0}
+  0%{transform:translate(120%,10%) scale(.9);opacity:0}
+  5%{opacity:1}
+  10%{transform:translate(96%,2%) scale(.93)}
+  14%{transform:translate(86%,9%) scale(.94)}
+  20%{transform:translate(70%,1%) scale(.96)}
+  24%{transform:translate(60%,8%) scale(.97)}
+  30%{transform:translate(44%,0%) scale(.98)}
+  34%{transform:translate(34%,7%) scale(.99)}
+  40%{transform:translate(18%,1%) scale(1)}
+  44%{transform:translate(8%,6%) scale(1)}
+  50%{transform:translate(0,2%) scale(1)}
+  54%{transform:translate(0,0) scale(1)}
+  78%{transform:translate(0,0) scale(1);opacity:1}
+  92%,100%{transform:translate(0,-8%) scale(.97);opacity:0}
+}
+@keyframes rizArmL{
+  0%,5%{transform:rotate(18deg)}
+  10%{transform:rotate(-14deg)}
+  14%{transform:rotate(16deg)}
+  20%{transform:rotate(-12deg)}
+  24%{transform:rotate(14deg)}
+  30%{transform:rotate(-10deg)}
+  34%{transform:rotate(12deg)}
+  40%{transform:rotate(-8deg)}
+  44%{transform:rotate(6deg)}
+  50%{transform:rotate(4deg)}
+  58%{transform:rotate(-32deg) translate(4px,-16px)}
+  66%{transform:rotate(-40deg) translate(8px,-26px)}
+  72%{transform:rotate(-18deg) translate(2px,-8px);opacity:1}
+  80%,100%{transform:rotate(-6deg);opacity:0}
+}
+@keyframes rizArmR{
+  0%,5%{transform:rotate(-16deg)}
+  10%{transform:rotate(12deg)}
+  14%{transform:rotate(-14deg)}
+  20%{transform:rotate(10deg)}
+  24%{transform:rotate(-12deg)}
+  30%{transform:rotate(8deg)}
+  34%{transform:rotate(-10deg)}
+  40%{transform:rotate(6deg)}
+  44%{transform:rotate(-4deg)}
+  50%{transform:rotate(-2deg)}
+  58%{transform:rotate(26deg) translate(-6px,-18px)}
+  66%{transform:rotate(34deg) translate(-12px,-30px)}
+  72%{transform:rotate(14deg) translate(-2px,-8px);opacity:1}
+  80%,100%{transform:rotate(0);opacity:0}
 }
 @keyframes rizGlasses{
-  /* held beside / below — “in hand” */
-  0%,42%{transform:translate(38px,52px) rotate(-18deg) scale(.92)}
-  48%{transform:translate(22px,34px) rotate(-10deg) scale(.95)}
-  56%{transform:translate(6px,10px) rotate(-3deg) scale(.98)}
-  62%,100%{transform:translate(0,0) rotate(0) scale(1)}
-}
-@keyframes rizHand{
-  0%,42%{opacity:.95;transform:translate(0,0)}
-  56%{opacity:.4;transform:translate(-8px,-18px)}
-  62%,100%{opacity:0;transform:translate(-12px,-28px)}
+  0%,48%{transform:translate(36px,52px) rotate(-20deg) scale(.88)}
+  52%{transform:translate(22px,34px) rotate(-12deg) scale(.92)}
+  58%{transform:translate(8px,14px) rotate(-4deg) scale(.97)}
+  64%{transform:translate(0,2px) rotate(0) scale(1)}
+  68%,100%{transform:translate(0,0) rotate(0) scale(1)}
 }
 @keyframes rizTagline{
-  0%,86%{opacity:0;transform:translateY(10px)}
+  0%,86%{opacity:0;transform:translateY(14px)}
   94%,100%{opacity:1;transform:translateY(0)}
 }
 
 @media (prefers-reduced-motion: reduce){
-  .riz-actor,.riz-glasses,.riz-hand{animation:none !important;opacity:0 !important}
+  .riz-actor,.riz-glasses,.riz-arm-l,.riz-arm-r{animation:none !important;opacity:0 !important}
   .riz-tagline{animation:none !important;opacity:1 !important;transform:none !important}
 }
+
 .lead{margin:0 0 28px;color:var(--muted);font-size:1.05rem;max-width:36rem;line-height:1.6;font-weight:500}
 .lead strong{color:var(--cream);font-weight:700}
 .hero-handle{

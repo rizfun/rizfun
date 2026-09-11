@@ -69,48 +69,28 @@
       <aside class="hero-stage" aria-label="Brand animation">
         <div class="riz-stage" id="rizStage">
           <div class="riz-actor" aria-hidden="true">
-            <svg class="riz-svg" viewBox="0 0 240 280" width="240" height="280" role="img" aria-hidden="true">
-              <!-- LEFT ARM (cream) — swings while walking, lifts glasses -->
-              <g class="riz-arm riz-arm-l">
-                <path fill="#F3E6C8" d="M78 128
-                  C62 138 48 158 44 178
-                  C42 188 48 194 56 192
-                  C68 188 78 168 84 152
-                  C86 144 84 134 78 128Z"/>
-                <g class="riz-hand riz-hand-l">
-                  <ellipse cx="50" cy="196" rx="14" ry="11" fill="#F3E6C8"/>
-                  <ellipse cx="42" cy="190" rx="5" ry="7" fill="#E8D4A8" transform="rotate(-25 42 190)"/>
+            <div class="riz-figure">
+              <svg class="riz-limbs" viewBox="0 0 200 240" aria-hidden="true">
+                <g class="riz-arm riz-arm-l">
+                  <line x1="72" y1="118" x2="48" y2="168" stroke="#F3E6C8" stroke-width="7" stroke-linecap="round"/>
+                  <circle class="riz-hand" cx="44" cy="174" r="9" fill="#F3E6C8"/>
                 </g>
-              </g>
-              <!-- RIGHT ARM (cream) — holds glasses low, then raises to face -->
-              <g class="riz-arm riz-arm-r">
-                <path fill="#F3E6C8" d="M162 128
-                  C178 138 192 158 196 178
-                  C198 188 192 194 184 192
-                  C172 188 162 168 156 152
-                  C154 144 156 134 162 128Z"/>
-                <g class="riz-hand riz-hand-r">
-                  <ellipse cx="190" cy="196" rx="14" ry="11" fill="#F3E6C8"/>
-                  <ellipse cx="198" cy="190" rx="5" ry="7" fill="#E8D4A8" transform="rotate(25 198 190)"/>
+                <g class="riz-arm riz-arm-r">
+                  <line x1="128" y1="118" x2="158" y2="168" stroke="#F3E6C8" stroke-width="7" stroke-linecap="round"/>
+                  <circle class="riz-hand" cx="164" cy="174" r="9" fill="#F3E6C8"/>
                 </g>
-              </g>
-              <!-- cream rice grain body -->
-              <path class="riz-grain" fill="#F3E6C8" d="M120 36
-                C156 36 186 74 186 128
-                C186 182 160 232 120 242
-                C80 232 54 182 54 128
-                C54 74 84 36 120 36Z"/>
-              <!-- soft belly shade for depth -->
-              <ellipse cx="120" cy="168" rx="38" ry="48" fill="#E8D4A8" opacity=".35"/>
-              <!-- black block sunglasses — held by hands, then donned on face -->
-              <g class="riz-glasses">
-                <rect x="52" y="108" width="58" height="40" rx="6" fill="#F3E6C8"/>
-                <rect x="130" y="108" width="58" height="40" rx="6" fill="#F3E6C8"/>
-                <rect x="104" y="120" width="32" height="16" fill="#F3E6C8"/>
-                <rect x="59" y="115" width="44" height="26" rx="3" fill="#000"/>
-                <rect x="137" y="115" width="44" height="26" rx="3" fill="#000"/>
-              </g>
-            </svg>
+              </svg>
+              <img class="riz-body" src="assets/rizfun-grain-body.png" alt="" width="200" height="200" draggable="false"/>
+              <svg class="riz-glasses-svg" viewBox="0 0 200 80" aria-hidden="true">
+                <g class="riz-glasses">
+                  <rect x="12" y="18" width="78" height="48" rx="4" fill="#F3E6C8"/>
+                  <rect x="110" y="18" width="78" height="48" rx="4" fill="#F3E6C8"/>
+                  <rect x="82" y="32" width="36" height="18" fill="#F3E6C8"/>
+                  <rect x="20" y="26" width="62" height="32" rx="2" fill="#000"/>
+                  <rect x="118" y="26" width="62" height="32" rx="2" fill="#000"/>
+                </g>
+              </svg>
+            </div>
           </div>
           <p class="riz-tagline">Got commodity rizz.</p>
         </div>
