@@ -21,7 +21,7 @@ Open http://127.0.0.1:8765/
 
 | Tab | What |
 |-----|------|
-| **Home** | Left: “Memes that pair with commodities”. Right: one-shot rice walk → glasses on → “Got commodity rizz.” holds. Gallery + empty launches |
+| **Home** | Left: “Memes that pair with commodities”. Right: fluid walk → glasses on → final hold freezes above “Got commodity rizz.” Gallery + empty launches |
 | **Commodities** | Full quote-asset directory (table + grid); Live / Soon |
 | **Create** | Live commodity picker (BNB / XAUt / PAXG) + token details |
 | **How it works** | Pair → curve (~$5k→~$35k) → **locked Uniswap v4** (hook fees; **not Pancake**); fee split 40/30/30 |
@@ -29,12 +29,11 @@ Open http://127.0.0.1:8765/
 ## Assets
 
 - Locked hard logo: `assets/rizfun-logo.png`
+- Hero final hold (hands-on-hips + logo black-lens sunglasses): `assets/riz-hero-final-hold.png`
+- Logo sunglasses: `assets/riz-glasses-logo.png`
+- Grain body (walk anim): `assets/rizfun-grain-body.png`
 - Optional brand banner (not shown on homepage): `assets/rizfun-banner.png`
 - Quote registry: `commodities.json` (~31 CME-style softs / metals / energy)
-
-## Wallet
-
-Nav **Connect Wallet** uses free injected `window.ethereum` (MetaMask / Rabby / Binance Wallet) on **BSC** (`0x38`). No WalletConnect cloud. Launch stays honestly disabled until contracts ship.
 
 ## Honest empty state
 

@@ -145,7 +145,7 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   line-height:1.35;
 }
 
-/* RIGHT STAGE — open black (NO card) · logo grain + stick arms · walk → glasses on → fade → tagline */
+/* RIGHT STAGE — open black (NO card) · fluid walk → glasses on → FREEZE final hold + tagline */
 .hero-stage{
   min-width:0;
   display:flex;
@@ -157,32 +157,46 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   position:relative;
   width:100%;
   max-width:400px;
-  aspect-ratio:1 / 1.05;
   margin:0 auto;
   border:0;
-  border-radius:0;
   background:transparent;
   overflow:visible;
-  box-shadow:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0;
+  padding:0;
 }
-.riz-actor{
+.riz-char-slot{
+  position:relative;
+  width:100%;
+  aspect-ratio:1 / 1.05;
+  max-width:360px;
+}
+/* Animated walk / put-on layer (fades out into hold) */
+.riz-play{
   position:absolute;
   inset:0;
   display:grid;
   place-items:center;
-  animation:rizActor 7.6s cubic-bezier(.45,.05,.25,1) forwards;
+  animation:rizPlay 6.4s cubic-bezier(.45,.05,.25,1) forwards;
   will-change:transform,opacity;
+  z-index:2;
+  pointer-events:none;
 }
 .riz-figure{
   position:relative;
   width:min(78%,280px);
-  aspect-ratio:1;
+  aspect-ratio:1 / 1.15;
 }
 .riz-body{
   position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+  left:50%;
+  top:8%;
+  width:78%;
+  height:auto;
+  aspect-ratio:1;
+  transform:translateX(-50%);
   object-fit:contain;
   display:block;
   pointer-events:none;
@@ -191,116 +205,186 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 }
 .riz-limbs{
   position:absolute;
-  inset:-8% -12%;
-  width:124%;
-  height:124%;
+  left:50%;
+  top:0;
+  width:118%;
+  height:118%;
+  transform:translateX(-50%);
   overflow:visible;
   z-index:1;
+  pointer-events:none;
 }
 .riz-arm-l{
   transform-origin:72px 118px;
-  animation:rizArmL 7.6s cubic-bezier(.45,.05,.25,1) forwards;
+  animation:rizArmL 6.4s cubic-bezier(.45,.05,.25,1) forwards;
 }
 .riz-arm-r{
   transform-origin:128px 118px;
-  animation:rizArmR 7.6s cubic-bezier(.45,.05,.25,1) forwards;
+  animation:rizArmR 6.4s cubic-bezier(.45,.05,.25,1) forwards;
 }
-.riz-glasses-svg{
+.riz-leg-l{
+  transform-origin:88px 168px;
+  animation:rizLegL 6.4s cubic-bezier(.45,.05,.25,1) forwards;
+}
+.riz-leg-r{
+  transform-origin:112px 168px;
+  animation:rizLegR 6.4s cubic-bezier(.45,.05,.25,1) forwards;
+}
+/* Logo sunglasses PNG — cream block frames + solid black lenses */
+.riz-glasses{
   position:absolute;
   left:50%;
-  top:42%;
-  width:92%;
+  top:38%;
+  width:72%;
   height:auto;
-  transform:translate(-50%,-50%);
-  overflow:visible;
   z-index:3;
   pointer-events:none;
+  user-select:none;
+  transform-origin:50% 50%;
+  animation:rizGlasses 6.4s cubic-bezier(.45,.05,.25,1) forwards;
 }
-.riz-glasses{
-  transform-origin:100px 40px;
-  animation:rizGlasses 7.6s cubic-bezier(.45,.05,.25,1) forwards;
-}
-.riz-tagline{
+/* Final hold — hands-on-hips + logo black-lens sunglasses; FREEZES forever */
+.riz-hold{
   position:absolute;
   inset:0;
+  z-index:3;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  margin:0 auto;
+  opacity:0;
+  pointer-events:none;
+  user-select:none;
+  animation:rizHoldIn 6.4s ease forwards;
+}
+.riz-tagline{
+  position:relative;
+  z-index:4;
   margin:0;
-  display:grid;
-  place-items:center;
-  padding:24px 18px;
+  width:100%;
+  padding:6px 12px 10px;
   text-align:center;
   font-family:var(--font);
   font-weight:900;
-  font-size:clamp(1.55rem,3.2vw,2.2rem);
+  font-size:clamp(1.45rem,3vw,2.05rem);
   line-height:1.12;
   letter-spacing:-.03em;
   color:var(--cream);
   opacity:0;
   pointer-events:none;
-  animation:rizTagline 7.6s ease forwards;
+  animation:rizTagline 6.4s ease forwards;
+  flex:0 0 auto;
 }
 
-@keyframes rizActor{
-  0%{transform:translate(120%,10%) scale(.9);opacity:0}
-  5%{opacity:1}
-  10%{transform:translate(96%,2%) scale(.93)}
-  14%{transform:translate(86%,9%) scale(.94)}
-  20%{transform:translate(70%,1%) scale(.96)}
-  24%{transform:translate(60%,8%) scale(.97)}
-  30%{transform:translate(44%,0%) scale(.98)}
-  34%{transform:translate(34%,7%) scale(.99)}
-  40%{transform:translate(18%,1%) scale(1)}
-  44%{transform:translate(8%,6%) scale(1)}
-  50%{transform:translate(0,2%) scale(1)}
-  54%{transform:translate(0,0) scale(1)}
-  78%{transform:translate(0,0) scale(1);opacity:1}
-  92%,100%{transform:translate(0,-8%) scale(.97);opacity:0}
+/* Play layer: slide/bob in (~2.5s), settle, then fade as hold takes over */
+@keyframes rizPlay{
+  0%{transform:translate(118%,12%) scale(.9);opacity:0}
+  3%{opacity:1}
+  6%{transform:translate(102%,3%) scale(.92)}
+  10%{transform:translate(90%,10%) scale(.93)}
+  14%{transform:translate(78%,2%) scale(.94)}
+  18%{transform:translate(66%,9%) scale(.95)}
+  22%{transform:translate(54%,1%) scale(.96)}
+  26%{transform:translate(42%,8%) scale(.97)}
+  30%{transform:translate(30%,1%) scale(.98)}
+  34%{transform:translate(18%,6%) scale(.99)}
+  38%{transform:translate(8%,1%) scale(1)}
+  42%{transform:translate(2%,4%) scale(1)}
+  48%{transform:translate(0,0) scale(1);opacity:1}
+  62%{transform:translate(0,0) scale(1);opacity:1}
+  78%{transform:translate(0,0) scale(1);opacity:0}
+  100%{transform:translate(0,0) scale(1);opacity:0}
 }
 @keyframes rizArmL{
-  0%,5%{transform:rotate(18deg)}
-  10%{transform:rotate(-14deg)}
-  14%{transform:rotate(16deg)}
-  20%{transform:rotate(-12deg)}
-  24%{transform:rotate(14deg)}
-  30%{transform:rotate(-10deg)}
-  34%{transform:rotate(12deg)}
-  40%{transform:rotate(-8deg)}
-  44%{transform:rotate(6deg)}
-  50%{transform:rotate(4deg)}
-  58%{transform:rotate(-32deg) translate(4px,-16px)}
-  66%{transform:rotate(-40deg) translate(8px,-26px)}
-  72%{transform:rotate(-18deg) translate(2px,-8px);opacity:1}
-  80%,100%{transform:rotate(-6deg);opacity:0}
+  0%,4%{transform:rotate(22deg)}
+  8%{transform:rotate(-18deg)}
+  12%{transform:rotate(20deg)}
+  16%{transform:rotate(-16deg)}
+  20%{transform:rotate(18deg)}
+  24%{transform:rotate(-14deg)}
+  28%{transform:rotate(16deg)}
+  32%{transform:rotate(-12deg)}
+  36%{transform:rotate(10deg)}
+  42%{transform:rotate(6deg)}
+  50%{transform:rotate(-8deg) translate(2px,-6px)}
+  58%{transform:rotate(-38deg) translate(6px,-22px)}
+  66%{transform:rotate(-48deg) translate(10px,-34px)}
+  72%{transform:rotate(-28deg) translate(4px,-14px)}
+  78%,100%{transform:rotate(-8deg);opacity:0}
 }
 @keyframes rizArmR{
-  0%,5%{transform:rotate(-16deg)}
-  10%{transform:rotate(12deg)}
-  14%{transform:rotate(-14deg)}
-  20%{transform:rotate(10deg)}
+  0%,4%{transform:rotate(-20deg)}
+  8%{transform:rotate(16deg)}
+  12%{transform:rotate(-18deg)}
+  16%{transform:rotate(14deg)}
+  20%{transform:rotate(-16deg)}
+  24%{transform:rotate(12deg)}
+  28%{transform:rotate(-14deg)}
+  32%{transform:rotate(10deg)}
+  36%{transform:rotate(-8deg)}
+  42%{transform:rotate(-4deg)}
+  50%{transform:rotate(10deg) translate(-2px,-4px)}
+  58%{transform:rotate(32deg) translate(-8px,-20px)}
+  66%{transform:rotate(42deg) translate(-12px,-32px)}
+  72%{transform:rotate(22deg) translate(-4px,-12px)}
+  78%,100%{transform:rotate(6deg);opacity:0}
+}
+@keyframes rizLegL{
+  0%,4%{transform:rotate(18deg)}
+  8%{transform:rotate(-16deg)}
+  12%{transform:rotate(18deg)}
+  16%{transform:rotate(-14deg)}
+  20%{transform:rotate(16deg)}
   24%{transform:rotate(-12deg)}
-  30%{transform:rotate(8deg)}
-  34%{transform:rotate(-10deg)}
-  40%{transform:rotate(6deg)}
-  44%{transform:rotate(-4deg)}
-  50%{transform:rotate(-2deg)}
-  58%{transform:rotate(26deg) translate(-6px,-18px)}
-  66%{transform:rotate(34deg) translate(-12px,-30px)}
-  72%{transform:rotate(14deg) translate(-2px,-8px);opacity:1}
-  80%,100%{transform:rotate(0);opacity:0}
+  28%{transform:rotate(14deg)}
+  32%{transform:rotate(-10deg)}
+  36%{transform:rotate(8deg)}
+  42%{transform:rotate(4deg)}
+  50%,76%{transform:rotate(-4deg);opacity:1}
+  82%,100%{transform:rotate(-4deg);opacity:0}
+}
+@keyframes rizLegR{
+  0%,4%{transform:rotate(-16deg)}
+  8%{transform:rotate(14deg)}
+  12%{transform:rotate(-16deg)}
+  16%{transform:rotate(12deg)}
+  20%{transform:rotate(-14deg)}
+  24%{transform:rotate(10deg)}
+  28%{transform:rotate(-12deg)}
+  32%{transform:rotate(8deg)}
+  36%{transform:rotate(-6deg)}
+  42%{transform:rotate(-2deg)}
+  50%,76%{transform:rotate(4deg);opacity:1}
+  82%,100%{transform:rotate(4deg);opacity:0}
 }
 @keyframes rizGlasses{
-  0%,48%{transform:translate(36px,52px) rotate(-20deg) scale(.88)}
-  52%{transform:translate(22px,34px) rotate(-12deg) scale(.92)}
-  58%{transform:translate(8px,14px) rotate(-4deg) scale(.97)}
-  64%{transform:translate(0,2px) rotate(0) scale(1)}
-  68%,100%{transform:translate(0,0) rotate(0) scale(1)}
+  0%,4%{transform:translate(calc(-50% + 42px),58px) rotate(-22deg) scale(.82)}
+  10%{transform:translate(calc(-50% + 38px),52px) rotate(-18deg) scale(.84)}
+  18%{transform:translate(calc(-50% + 34px),48px) rotate(-16deg) scale(.86)}
+  26%{transform:translate(calc(-50% + 28px),42px) rotate(-12deg) scale(.88)}
+  34%{transform:translate(calc(-50% + 22px),36px) rotate(-10deg) scale(.9)}
+  42%{transform:translate(calc(-50% + 16px),28px) rotate(-6deg) scale(.92)}
+  50%{transform:translate(calc(-50% + 10px),16px) rotate(-3deg) scale(.95)}
+  58%{transform:translate(calc(-50% + 4px),6px) rotate(-1deg) scale(.98)}
+  66%{transform:translate(-50%,0) rotate(0) scale(1);opacity:1}
+  74%{transform:translate(-50%,0) rotate(0) scale(1);opacity:0}
+  100%{transform:translate(-50%,0) rotate(0) scale(1);opacity:0}
+}
+/* Hold fades in as play fades out, then FREEZES (forwards, no further keyframes) */
+@keyframes rizHoldIn{
+  0%,62%{opacity:0;transform:scale(.98)}
+  78%{opacity:1;transform:scale(1)}
+  100%{opacity:1;transform:scale(1)}
 }
 @keyframes rizTagline{
-  0%,86%{opacity:0;transform:translateY(14px)}
-  94%,100%{opacity:1;transform:translateY(0)}
+  0%,74%{opacity:0;transform:translateY(10px)}
+  88%,100%{opacity:1;transform:translateY(0)}
 }
 
 @media (prefers-reduced-motion: reduce){
-  .riz-actor,.riz-glasses,.riz-arm-l,.riz-arm-r{animation:none !important;opacity:0 !important}
+  .riz-play,.riz-glasses,.riz-arm-l,.riz-arm-r,.riz-leg-l,.riz-leg-r{animation:none !important;opacity:0 !important;visibility:hidden !important}
+  .riz-hold{animation:none !important;opacity:0 !important;visibility:hidden !important}
   .riz-tagline{animation:none !important;opacity:1 !important;transform:none !important}
 }
 
@@ -652,16 +736,30 @@ footer{padding:36px 0 52px;color:var(--dim);font-size:.82rem;border-top:var(--bo
   background:var(--cream);color:var(--ink);font-size:1rem;
 }
 
-/* WALLET (nav + create) — injected EIP-1193; do not touch hero-stage */
-.wallet-slot{display:inline-flex;align-items:center;gap:8px;margin-left:4px}
-.wallet-connected{display:inline-flex;align-items:center;gap:8px}
-.wallet-addr{
-  font-size:.72rem;font-weight:700;letter-spacing:.02em;
-  padding:6px 10px;border-radius:var(--radius);
-  border:var(--border) solid var(--cream);color:var(--cream);
-  background:rgba(243,230,200,.06);max-width:12ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+/* WALLET (nav + create) — match Create / chain-pill compact size */
+.nav-links > .btn-sm,
+.nav-links .wallet-btn{
+  padding:6px 11px;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.04em;
+  line-height:1.2;
+  min-height:0;
+  height:auto;
+  box-shadow:none;
+  white-space:nowrap;
 }
-.wallet-btn{white-space:nowrap}
+.nav-links .btn-primary.wallet-btn{box-shadow:none}
+.nav-links .btn-primary.wallet-btn:hover{box-shadow:none;transform:none;background:var(--cream2)}
+.wallet-slot{display:inline-flex;align-items:center;gap:6px;margin-left:4px}
+.wallet-connected{display:inline-flex;align-items:center;gap:6px}
+.wallet-addr{
+  font-size:.7rem;font-weight:700;letter-spacing:.04em;
+  padding:6px 11px;border-radius:var(--radius);
+  border:var(--border) solid var(--cream);color:var(--cream);
+  background:transparent;max-width:11ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  line-height:1.2;
+}
 .wallet-wrong{border-color:#e8a54b;color:#e8a54b}
 .wallet-wrong:hover{background:#e8a54b;color:var(--ink)}
 @media(max-width:720px){
