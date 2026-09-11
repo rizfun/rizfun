@@ -507,11 +507,13 @@
     const form = $("#createForm");
     if (form) {
       form.addEventListener("submit", (e) => {
+        /* Wallet module handles connect / network / honest-disabled launch (capture phase). */
+        if (window.RizWallet) return;
         e.preventDefault();
         const msg = $("#createMsg");
         if (msg) {
           msg.textContent =
-            "Coming soon — launch creation opens when the protocol ships. Your details stay local for now.";
+            "Launch opens when the protocol ships. Connect a wallet from the nav when you are ready.";
           msg.hidden = false;
         }
       });

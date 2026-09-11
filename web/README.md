@@ -1,6 +1,6 @@
 # Riz.Fun — public site
 
-Static HTML/CSS/JS for **Riz.Fun** (`$RIZ`, rice + rizz) on **BNB Chain**.
+Static HTML/CSS/JS for **Riz.Fun** (`$RIZ`) on **BNB Chain**.
 
 **Brand lock:** hard neo-brutal cream rice-grain + black block sunglasses — Inter Black / grotesque, pure `#000` + cream `#F3E6C8`. Not soft gold Instrument Serif luxury.
 
@@ -31,6 +31,10 @@ Open http://127.0.0.1:8765/
 - Locked hard logo: `assets/rizfun-logo.png`
 - Optional brand banner (not shown on homepage): `assets/rizfun-banner.png`
 - Quote registry: `commodities.json` (~31 CME-style softs / metals / energy)
+
+## Wallet
+
+Nav **Connect Wallet** uses free injected `window.ethereum` (MetaMask / Rabby / Binance Wallet) on **BSC** (`0x38`). No WalletConnect cloud. Launch stays honestly disabled until contracts ship.
 
 ## Honest empty state
 

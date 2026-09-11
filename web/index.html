@@ -7,7 +7,7 @@
 <meta name="description" content="Riz.Fun — Got commodity rizz. Memes that pair with commodities on BNB Chain. Directory: gold, silver, oil, wheat, corn, coffee and more. Live BNB · XAUt · PAXG. @RizForFun"/>
 <meta name="theme-color" content="#000000"/>
 <meta property="og:title" content="Riz.Fun · Got commodity rizz."/>
-<meta property="og:description" content="Got commodity rizz. Memes that pair with commodities on BNB. Rice + rizz. @RizForFun"/>
+<meta property="og:description" content="Got commodity rizz. Memes that pair with commodities on BNB. @RizForFun"/>
 <meta property="og:image" content="assets/rizfun-logo.png"/>
 <link rel="icon" type="image/png" href="assets/rizfun-logo.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -30,7 +30,10 @@
       <button type="button" class="nav-btn" data-view="create">Create</button>
       <button type="button" class="nav-btn" data-view="about">How it works</button>
       <span class="chain-pill mono"><span class="dot"></span> BSC</span>
-      <button type="button" class="btn btn-primary btn-sm" data-goto="create">Create</button>
+      <div class="wallet-slot" id="walletSlot">
+        <button type="button" class="btn btn-primary btn-sm wallet-btn" data-wallet-action="connect">Connect Wallet</button>
+      </div>
+      <button type="button" class="btn btn-ghost btn-sm" data-goto="create">Create</button>
     </nav>
   </div>
 </header>
@@ -42,7 +45,7 @@
       <div class="hero-copy">
         <div class="kicker mono">BNB CHAIN · COMMODITY QUOTE DIRECTORY</div>
         <h1 class="hero-punch">Memes that <em>pair</em> with commodities</h1>
-        <p class="hero-sub">Rice + rizz. Launch against real quote assets on BNB.</p>
+        <p class="hero-sub">Launch against real quote assets on BNB.</p>
         <p class="hero-handle mono">On BNB · <a href="https://x.com/RizForFun" target="_blank" rel="noopener">@RizForFun</a></p>
         <p class="lead">
           Riz.Fun launches coins against a growing commodity catalog —
@@ -66,24 +69,46 @@
       <aside class="hero-stage" aria-label="Brand animation">
         <div class="riz-stage" id="rizStage">
           <div class="riz-actor" aria-hidden="true">
-            <svg class="riz-svg" viewBox="0 0 200 240" width="200" height="240" role="img" aria-hidden="true">
-              <!-- cream rice grain — hard body, no arms/legs (logo lock) -->
-              <path class="riz-grain" fill="#F3E6C8" d="M100 28
-                C132 28 158 62 158 112
-                C158 162 136 208 100 216
-                C64 208 42 162 42 112
-                C42 62 68 28 100 28Z"/>
-              <!-- tiny implied hand while carrying glasses -->
-              <g class="riz-hand">
-                <ellipse cx="152" cy="172" rx="10" ry="7.5" fill="#F3E6C8"/>
+            <svg class="riz-svg" viewBox="0 0 240 280" width="240" height="280" role="img" aria-hidden="true">
+              <!-- LEFT ARM (cream) — swings while walking, lifts glasses -->
+              <g class="riz-arm riz-arm-l">
+                <path fill="#F3E6C8" d="M78 128
+                  C62 138 48 158 44 178
+                  C42 188 48 194 56 192
+                  C68 188 78 168 84 152
+                  C86 144 84 134 78 128Z"/>
+                <g class="riz-hand riz-hand-l">
+                  <ellipse cx="50" cy="196" rx="14" ry="11" fill="#F3E6C8"/>
+                  <ellipse cx="42" cy="190" rx="5" ry="7" fill="#E8D4A8" transform="rotate(-25 42 190)"/>
+                </g>
               </g>
-              <!-- black block sunglasses (held separate, then donned) -->
+              <!-- RIGHT ARM (cream) — holds glasses low, then raises to face -->
+              <g class="riz-arm riz-arm-r">
+                <path fill="#F3E6C8" d="M162 128
+                  C178 138 192 158 196 178
+                  C198 188 192 194 184 192
+                  C172 188 162 168 156 152
+                  C154 144 156 134 162 128Z"/>
+                <g class="riz-hand riz-hand-r">
+                  <ellipse cx="190" cy="196" rx="14" ry="11" fill="#F3E6C8"/>
+                  <ellipse cx="198" cy="190" rx="5" ry="7" fill="#E8D4A8" transform="rotate(25 198 190)"/>
+                </g>
+              </g>
+              <!-- cream rice grain body -->
+              <path class="riz-grain" fill="#F3E6C8" d="M120 36
+                C156 36 186 74 186 128
+                C186 182 160 232 120 242
+                C80 232 54 182 54 128
+                C54 74 84 36 120 36Z"/>
+              <!-- soft belly shade for depth -->
+              <ellipse cx="120" cy="168" rx="38" ry="48" fill="#E8D4A8" opacity=".35"/>
+              <!-- black block sunglasses — held by hands, then donned on face -->
               <g class="riz-glasses">
-                <rect x="38" y="94" width="54" height="38" rx="5" fill="#F3E6C8"/>
-                <rect x="108" y="94" width="54" height="38" rx="5" fill="#F3E6C8"/>
-                <rect x="88" y="106" width="24" height="14" fill="#F3E6C8"/>
-                <rect x="45" y="101" width="40" height="24" rx="2" fill="#000"/>
-                <rect x="115" y="101" width="40" height="24" rx="2" fill="#000"/>
+                <rect x="52" y="108" width="58" height="40" rx="6" fill="#F3E6C8"/>
+                <rect x="130" y="108" width="58" height="40" rx="6" fill="#F3E6C8"/>
+                <rect x="104" y="120" width="32" height="16" fill="#F3E6C8"/>
+                <rect x="59" y="115" width="44" height="26" rx="3" fill="#000"/>
+                <rect x="137" y="115" width="44" height="26" rx="3" fill="#000"/>
               </g>
             </svg>
           </div>
@@ -249,9 +274,9 @@
               </div>
             </div>
             <div style="margin-top:20px">
-              <button class="btn btn-primary" type="submit" style="width:100%">Coming soon</button>
+              <button class="btn btn-primary" type="submit" id="createSubmit" style="width:100%" data-mode="connect">Connect wallet to launch</button>
               <p id="createMsg" class="soft-note" hidden></p>
-              <p class="submit-note">Launch creation opens when the protocol ships. No invented contract addresses.</p>
+              <p class="submit-note">Connect an injected wallet (MetaMask / Rabby / Binance). Launch opens when the protocol ships — no fake txs. Never share a seed phrase.</p>
             </div>
           </div>
         </div>
@@ -338,14 +363,14 @@
       <div class="section-h">
         <div>
           <h2>About Riz.Fun</h2>
-          <p>Rice + rizz · commodities-first · CT English · BSC · <a href="https://x.com/RizForFun" target="_blank" rel="noopener">@RizForFun</a></p>
+          <p>Commodities-first · CT English · BSC · <a href="https://x.com/RizForFun" target="_blank" rel="noopener">@RizForFun</a></p>
         </div>
       </div>
       <div class="how">
         <div class="step">
           <div class="n">BRAND</div>
-          <h3>Rice + rizz</h3>
-          <p>Hard cream rice-grain with block sunglasses. Pure black + cream. Protocol token <strong>$RIZ</strong>. Got commodity rizz. Memes that pair with commodities.</p>
+          <h3>Got commodity rizz</h3>
+          <p>Hard cream grain mark with block sunglasses. Pure black + cream. Protocol token <strong>$RIZ</strong>. Got commodity rizz. Memes that pair with commodities.</p>
         </div>
         <div class="step">
           <div class="n">QUOTES</div>
@@ -381,6 +406,7 @@
   </div>
 </footer>
 
+<script src="js/wallet.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
