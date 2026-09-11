@@ -39,7 +39,7 @@ body{
   pointer-events:none;position:fixed;inset:0;z-index:0;opacity:.04;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.wrap,.nav,.ticker,main,footer{position:relative;z-index:1}
+.wrap,.nav,main,footer{position:relative;z-index:1}
 a{color:var(--cream2);text-decoration:none}
 a:hover{text-decoration:underline;text-underline-offset:3px}
 .mono{font-family:var(--mono)}
@@ -97,26 +97,26 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
 .btn-ghost:hover{background:var(--cream);color:var(--ink)}
 .btn-sm{padding:7px 13px;font-size:.76rem}
 
-/* TICKER */
-.ticker{overflow:hidden;border-bottom:var(--border) solid var(--line2);background:#050505}
-.ticker-track{
-  display:flex;gap:36px;white-space:nowrap;padding:10px 0;
-  animation:marquee 38s linear infinite;color:var(--cream-dim);font-size:.76rem;letter-spacing:.08em;font-weight:600;
-}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
 /* VIEWS */
 .view{display:none;padding-bottom:56px}
 .view.active{display:block}
 
-/* HERO — text-only (logo stays in nav/footer; no bowl-march banner) */
+/* HERO — two columns: product pitch left, one-shot rice anim right */
 .hero{
   padding:40px 0 36px;
-  display:block;
-  max-width:52rem;
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);
+  gap:28px 36px;
+  align-items:center;
+  max-width:none;
 }
 @media(max-width:900px){
-  .hero{padding:32px 0 28px}
+  .hero{
+    grid-template-columns:1fr;
+    padding:28px 0 24px;
+    gap:18px;
+  }
+  .hero-stage{order:-1} /* anim above copy on mobile */
 }
 .hero-copy{min-width:0}
 .kicker{
@@ -129,8 +129,8 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   margin:0 0 14px;
   font-family:var(--font);
   font-weight:900;
-  font-size:clamp(2.5rem,5.6vw,3.75rem);
-  line-height:1.02;letter-spacing:-.035em;max-width:14ch;
+  font-size:clamp(2.15rem,4.8vw,3.35rem);
+  line-height:1.05;letter-spacing:-.035em;max-width:16ch;
   color:var(--cream);
 }
 .hero h1 em,.hero-punch em{font-style:normal;color:var(--text-bright);border-bottom:3px solid var(--cream)}
@@ -143,6 +143,99 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   color:var(--cream2);
   max-width:28rem;
   line-height:1.35;
+}
+
+/* RIGHT STAGE — walk once → glasses on → fade → tagline holds */
+.hero-stage{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.riz-stage{
+  position:relative;
+  width:100%;
+  max-width:340px;
+  aspect-ratio:1 / 1.05;
+  margin:0 auto;
+  border:var(--border) solid var(--cream);
+  border-radius:var(--radius-lg);
+  background:#000;
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+.riz-actor{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  animation:rizActor 6.2s cubic-bezier(.22,.7,.2,1) forwards;
+  will-change:transform,opacity;
+}
+.riz-svg{width:min(72%,220px);height:auto;display:block;overflow:visible}
+.riz-hand{
+  transform-origin:148px 168px;
+  animation:rizHand 6.2s cubic-bezier(.22,.7,.2,1) forwards;
+}
+.riz-glasses{
+  transform-origin:100px 114px;
+  animation:rizGlasses 6.2s cubic-bezier(.22,.7,.2,1) forwards;
+}
+.riz-tagline{
+  position:absolute;
+  inset:0;
+  margin:0;
+  display:grid;
+  place-items:center;
+  padding:24px 20px;
+  text-align:center;
+  font-family:var(--font);
+  font-weight:900;
+  font-size:clamp(1.55rem,3.2vw,2.15rem);
+  line-height:1.12;
+  letter-spacing:-.03em;
+  color:var(--cream);
+  opacity:0;
+  pointer-events:none;
+  animation:rizTagline 6.2s ease forwards;
+}
+
+/* 0–45%: enter from right with bob, glasses held low-right
+   45–62%: put sunglasses on face
+   62–78%: hold locked logo pose
+   78–90%: character fades
+   88–100%: tagline in, then hold forever */
+@keyframes rizActor{
+  0%{transform:translate(118%,8%) scale(.92);opacity:0}
+  8%{opacity:1}
+  12%{transform:translate(86%,2%) scale(.95)}
+  22%{transform:translate(58%,7%) scale(.97)}
+  32%{transform:translate(32%,1%) scale(.99)}
+  42%{transform:translate(8%,5%) scale(1)}
+  48%{transform:translate(0,0) scale(1)}
+  76%{transform:translate(0,0) scale(1);opacity:1}
+  90%,100%{transform:translate(0,-6%) scale(.98);opacity:0}
+}
+@keyframes rizGlasses{
+  /* held beside / below — “in hand” */
+  0%,42%{transform:translate(38px,52px) rotate(-18deg) scale(.92)}
+  48%{transform:translate(22px,34px) rotate(-10deg) scale(.95)}
+  56%{transform:translate(6px,10px) rotate(-3deg) scale(.98)}
+  62%,100%{transform:translate(0,0) rotate(0) scale(1)}
+}
+@keyframes rizHand{
+  0%,42%{opacity:.95;transform:translate(0,0)}
+  56%{opacity:.4;transform:translate(-8px,-18px)}
+  62%,100%{opacity:0;transform:translate(-12px,-28px)}
+}
+@keyframes rizTagline{
+  0%,86%{opacity:0;transform:translateY(10px)}
+  94%,100%{opacity:1;transform:translateY(0)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .riz-actor,.riz-glasses,.riz-hand{animation:none !important;opacity:0 !important}
+  .riz-tagline{animation:none !important;opacity:1 !important;transform:none !important}
 }
 .lead{margin:0 0 28px;color:var(--muted);font-size:1.05rem;max-width:36rem;line-height:1.6;font-weight:500}
 .lead strong{color:var(--cream);font-weight:700}
