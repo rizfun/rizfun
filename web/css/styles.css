@@ -125,20 +125,29 @@ a:hover{text-decoration:underline;text-underline-offset:3px}
   border:var(--border) solid var(--cream);
   background:transparent;padding:7px 14px;border-radius:var(--radius);margin-bottom:22px;
 }
-.hero h1{
-  margin:0 0 18px;
+.hero h1,.hero-punch{
+  margin:0 0 14px;
   font-family:var(--font);
   font-weight:900;
-  font-size:clamp(2.35rem,5.2vw,3.55rem);
-  line-height:1.02;letter-spacing:-.035em;max-width:18ch;
+  font-size:clamp(2.5rem,5.6vw,3.75rem);
+  line-height:1.02;letter-spacing:-.035em;max-width:14ch;
   color:var(--cream);
 }
-.hero h1 em{font-style:normal;color:var(--text-bright);border-bottom:3px solid var(--cream)}
+.hero h1 em,.hero-punch em{font-style:normal;color:var(--text-bright);border-bottom:3px solid var(--cream)}
 .hero h1 span{color:var(--cream2)}
+.hero-sub{
+  margin:0 0 16px;
+  font-size:clamp(1.05rem,2.2vw,1.35rem);
+  font-weight:700;
+  letter-spacing:-.02em;
+  color:var(--cream2);
+  max-width:28rem;
+  line-height:1.35;
+}
 .lead{margin:0 0 28px;color:var(--muted);font-size:1.05rem;max-width:36rem;line-height:1.6;font-weight:500}
 .lead strong{color:var(--cream);font-weight:700}
 .hero-handle{
-  display:inline-flex;align-items:center;gap:8px;margin:-12px 0 22px;
+  display:inline-flex;align-items:center;gap:8px;margin:-4px 0 22px;
   font-size:.82rem;font-weight:700;color:var(--cream-dim);letter-spacing:.02em;
 }
 .hero-handle a{color:var(--cream);font-weight:800}

@@ -4,7 +4,7 @@ Static HTML/CSS/JS for **Riz.Fun** (`$RIZ`, rice + rizz) on **BNB Chain**.
 
 **Brand lock:** hard neo-brutal cream rice-grain + black block sunglasses — Inter Black / grotesque, pure `#000` + cream `#F3E6C8`. Not soft gold Instrument Serif luxury.
 
-Tagline: **Memes that pair with commodities. On BNB.** · [@RizForFun](https://x.com/RizForFun)
+Tagline: **Got commodity rizz.** · Memes that pair with commodities. On BNB. · [@RizForFun](https://x.com/RizForFun)
 
 Commodities-first launcher UI: pair memes against a **commodity quote directory** (gold, silver, oil, wheat, corn, coffee…). Day-1 live quotes: **BNB**, **XAUt**, **PAXG**.
 
@@ -21,7 +21,7 @@ Open http://127.0.0.1:8765/
 
 | Tab | What |
 |-----|------|
-| **Home** | Hero (text-only) + commodities gallery + empty launches |
+| **Home** | Hero punch “Got commodity rizz.” + commodities support + gallery + empty launches |
 | **Commodities** | Full quote-asset directory (table + grid); Live / Soon |
 | **Create** | Live commodity picker (BNB / XAUt / PAXG) + token details |
 | **How it works** | Pair → curve (~$5k→~$35k) → locked Uniswap v4; fee split 40/30/30 |
