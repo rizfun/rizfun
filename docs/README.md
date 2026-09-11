@@ -29,7 +29,7 @@ Product lock (economics, UX, disclosures):
 
 - A **fork/port of Pons V2**, not a from-scratch launchpad.
 - Product mirror of **commodites.market** (opening ~$5k, graduate ~$35k, 1B supply, 1–3% fee, 40/30/30 holders / `$RIZ` buyback / protocol) on BSC.
-- Under the hood: Pons curve + shared V4 hook; liquidity locked at graduation.
+- Under the hood: Pons curve → **Uniswap v4 on BSC** graduation (post-grad **hook fees**, LP locked). **Pancake not default.**
 
 ## What this is not
 
@@ -40,6 +40,8 @@ Product lock (economics, UX, disclosures):
 ---
 
 ## Canonical Uniswap v4 (BSC) — already live
+
+**User lock:** graduation pool = **Uniswap v4 on BSC** (hook fees post-grad; LP permanently locked). **Pancake is not the default** liquidity endpoint.
 
 | Contract | Address |
 |----------|---------|

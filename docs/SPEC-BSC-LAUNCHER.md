@@ -46,7 +46,7 @@ Public product facts we lock as the UX/economic target. Implementation maps onto
 | Holder payout cadence | ~**every 15 minutes** in the paired commodity (sweep/distributor cadence — tune) |
 | Launch inputs | Image, name, ticker; pick **up to 5** commodity pair coins + **weights**; trading fee 1–3%; optional first buy |
 | First buy | Min ~**$1** in **BNB** (native) or a stable/commodity quote path (commodites uses ETH/USDG; on BSC: BNB + approved quotes) |
-| Under the hood | **Pons + Uniswap v4** (we fork Pons V2 MIT → BSC) |
+| Under the hood | **Pons + Uniswap v4 on BSC** (graduation = locked v4 pool + hook fees; **not** Pancake) |
 
 ### Multi-quote (up to 5 + weights)
 
@@ -63,8 +63,8 @@ Do not pretend multi-quote is already in the cloned contracts until we design th
 
 1. **Create** — name, ticker, image, socials; choose quote(s); set trading fee 1–3%; optional first buy ≥ ~$1.
 2. **Trade the curve** — constant-product bonding curve in the chosen quote; open ~$5k mcap; sell anytime until graduation edge.
-3. **Graduate** — at ~$35k endpoint, curve closes; reserves seed a Uniswap v4 full-range pool; LP NFT locked permanently.
-4. **Pool** — ordinary Uniswap v4 swaps; hook takes the protocol fee cut; liquidity cannot be withdrawn by creator or protocol.
+3. **Graduate** — at ~$35k endpoint, curve closes; reserves seed a **Uniswap v4** full-range pool on BSC; LP NFT locked permanently.
+4. **Pool** — ordinary Uniswap v4 swaps; **post-grad fees via the v4 hook** (`poolFee = 0`); liquidity cannot be withdrawn by creator or protocol. **Not Pancake** (see Graduation venue lock).
 
 No custody of user funds by the brand. Users sign with their own wallets.
 
@@ -109,6 +109,17 @@ Source of truth: `bsc/commodities.json`.
 Only factory-approved pair tokens can be used as launch quotes. Approval ≠ endorsement. Thin books stay disabled.
 
 ---
+
+## Graduation venue lock (user lock · 2026-09-11)
+
+**Default graduation pool = Uniswap v4 on BSC.** Post-grad trading fees are taken by the **v4 hook** (`poolFee = 0` on the pool itself; hook charges). LP / position NFT is **permanently locked**.
+
+| Venue | Status |
+|-------|--------|
+| **Uniswap v4 (BSC)** | **Default / locked** — seed full-range pool; hook fees; locker holds NFT |
+| PancakeSwap (v2/v3/Infinity) | **Not the default.** Do not wire graduation to Pancake unless product explicitly re-opens this |
+
+Do not market “graduates to Pancake” or treat PCS as the day-1 liquidity endpoint.
 
 ## Uniswap v4 on BSC (canonical — not ours)
 

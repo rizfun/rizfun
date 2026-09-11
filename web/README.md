@@ -24,7 +24,7 @@ Open http://127.0.0.1:8765/
 | **Home** | Left: “Memes that pair with commodities”. Right: one-shot rice walk → glasses on → “Got commodity rizz.” holds. Gallery + empty launches |
 | **Commodities** | Full quote-asset directory (table + grid); Live / Soon |
 | **Create** | Live commodity picker (BNB / XAUt / PAXG) + token details |
-| **How it works** | Pair → curve (~$5k→~$35k) → locked Uniswap v4; fee split 40/30/30 |
+| **How it works** | Pair → curve (~$5k→~$35k) → **locked Uniswap v4** (hook fees; **not Pancake**); fee split 40/30/30 |
 
 ## Assets
 

@@ -3,7 +3,7 @@
 Commodity-paired memecoin launcher on **BNB Chain (BSC)**.
 
 - Brand: **Riz.Fun** · ticker **$RIZ** · meta rice + rizz
-- Stack: Pons V2 fork (MIT) → Uniswap v4 on BSC
+- Stack: Pons V2 fork (MIT) → **Uniswap v4 on BSC** graduation (locked pool + hook fees; **Pancake not default**)
 - Live UI (DEMO): https://rizfun.github.io/rizfun-site/
 
 ## Layout

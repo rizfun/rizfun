@@ -55,6 +55,12 @@ Factory constructor already takes `poolManager_`, `positionManager_`, `permit2_`
 
 ---
 
+## Graduation pool lock (user lock · 2026-09-11)
+
+**Graduation seeds Uniswap v4 on BSC only** (PoolManager / PositionManager / Permit2 above). Post-grad fees = **hook fees** (`poolFee = 0`). LP NFT → permanent locker.
+
+**PancakeSwap is not the default graduation venue.** Do not retarget `PonsV2GraduationExecutor` / factory to PCS v2/v3/Infinity unless product explicitly unlocks that path. Day-1 docs, deploy scripts, and site copy must say **Uniswap v4 locked pool**, not Pancake.
+
 ## Hook flags (keep exactly — address must encode them)
 
 From `PonsV2MemeHook.getHookPermissions()`:
@@ -158,7 +164,7 @@ From `bsc/commodities.json`, owner calls `setApprovedPairToken` + `setPairTokenE
 
 ### 5. Pool params (keep Pons defaults unless product forces change)
 
-Upstream graduated pools: `poolFee = 0` (hook charges), typical `tickSpacing = 200`. Keep unless we deliberately change.
+Upstream graduated pools: `poolFee = 0` (hook charges post-grad), typical `tickSpacing = 200`. Keep unless we deliberately change. **Venue = Uniswap v4 on BSC — not Pancake.**
 
 ### 6. Fee-model delta (must track explicitly)
 

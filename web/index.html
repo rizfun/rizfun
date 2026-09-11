@@ -48,7 +48,7 @@
           Riz.Fun launches coins against a growing commodity catalog —
           day-1 live quotes <strong>BNB</strong>, <strong>gold (XAUt)</strong>, and <strong>gold (PAXG)</strong>,
           plus metals, energy, and agriculture on the registry.
-          Bonding curve to a locked Uniswap v4 pool.
+          Bonding curve to a locked Uniswap v4 pool (hook fees post-grad; not Pancake).
           Commodities are the product. <strong>$RIZ</strong> is the protocol token.
         </p>
         <div class="hero-cta">
@@ -58,7 +58,7 @@
         <div class="stats">
           <div class="stat"><div class="l">Chain</div><div class="v">BSC</div><div class="s">BNB Chain</div></div>
           <div class="stat"><div class="l">Quotes</div><div class="v" id="statQuotesValue">31</div><div class="s" id="statQuotesSub">3 live · expanding registry</div></div>
-          <div class="stat"><div class="l">Curve</div><div class="v">$5k→$35k</div><div class="s">then locked v4</div></div>
+          <div class="stat"><div class="l">Curve</div><div class="v">$5k→$35k</div><div class="s">then locked Uniswap v4</div></div>
           <div class="stat"><div class="l">Token</div><div class="v">$RIZ</div><div class="s">buyback leg</div></div>
         </div>
       </div>
@@ -273,7 +273,7 @@
           <div class="row"><span class="k">Starting mcap</span><span class="mono">~$5,000</span></div>
           <div class="row"><span class="k">Graduate</span><span class="mono">~$35,000</span></div>
           <div class="row"><span class="k">Supply</span><span class="mono">1,000,000,000</span></div>
-          <div class="row"><span class="k">Liquidity</span><span>Locked Uniswap v4 LP</span></div>
+          <div class="row"><span class="k">Liquidity</span><span>Locked Uniswap v4 LP (not Pancake)</span></div>
           <div class="fee-box">
             Fee split: <strong>40%</strong> holders (in paired commodity) ·
             <strong>30%</strong> buyback <strong>$RIZ</strong> ·
@@ -290,7 +290,7 @@
       <div class="section-h">
         <div>
           <h2>How it works</h2>
-          <p>Commodity pair → bonding curve → graduated locked pool.</p>
+          <p>Commodity pair → bonding curve → <strong>locked Uniswap v4</strong> pool (not Pancake).</p>
         </div>
       </div>
       <div class="how">
@@ -306,8 +306,8 @@
         </div>
         <div class="step">
           <div class="n">03</div>
-          <h3>Graduate to locked v4</h3>
-          <p>At the endpoint, reserves seed a Uniswap v4 full-range pool. LP is locked permanently.</p>
+          <h3>Graduate to locked Uniswap v4</h3>
+          <p>At the endpoint, reserves seed a <strong>Uniswap v4</strong> full-range pool on BSC. Post-grad fees go through the <strong>v4 hook</strong>. LP is locked permanently. Pancake is not the default.</p>
         </div>
       </div>
     </div>
