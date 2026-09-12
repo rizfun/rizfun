@@ -29,7 +29,7 @@
       <button type="button" class="nav-btn" data-view="commodities">Commodities</button>
       <button type="button" class="nav-btn" data-view="create">Create</button>
       <button type="button" class="nav-btn" data-view="about">How it works</button>
-      <span class="chain-pill mono"><span class="dot"></span> BSC</span>
+      <span class="chain-pill mono"><span class="dot"></span> BSC Mainnet</span>
       <div class="wallet-slot" id="walletSlot">
         <button type="button" class="btn btn-primary btn-sm wallet-btn" data-wallet-action="connect">Connect Wallet</button>
       </div>
@@ -46,13 +46,8 @@
         <div class="kicker mono">BNB CHAIN · COMMODITY QUOTE DIRECTORY</div>
         <h1 class="hero-punch">Memes that <em>pair</em> with commodities</h1>
         <p class="hero-sub">Launch against real quote assets on BNB.</p>
-        <p class="hero-handle mono">On BNB · <a href="https://x.com/RizForFun" target="_blank" rel="noopener">@RizForFun</a></p>
         <p class="lead">
-          Riz.Fun launches coins against a growing commodity catalog —
-          day-1 live quotes <strong>BNB</strong>, <strong>gold (XAUt)</strong>, and <strong>gold (PAXG)</strong>,
-          plus metals, energy, and agriculture on the registry.
-          Bonding curve to a locked Uniswap v4 pool (hook fees post-grad; not Pancake).
-          Commodities are the product. <strong>$RIZ</strong> is the protocol token.
+          Launch. Trade the curve. Graduate to locked Uniswap v4.
         </p>
         <div class="hero-cta">
           <button type="button" class="btn btn-primary" data-goto="create">Launch with a commodity</button>
@@ -115,7 +110,7 @@
       <div class="section-h">
         <div>
           <h2>Launches</h2>
-          <p>Honest empty board until the protocol ships real launches.</p>
+          <p>Launches created on BSC Mainnet from this wallet appear here.</p>
         </div>
       </div>
       <div id="featuredLaunches"></div>
@@ -172,7 +167,7 @@
         <div class="section-h">
           <div>
             <h2>Launches board</h2>
-            <p>No fake sample rows — empty until real launches exist.</p>
+            <p>Launches on BSC Mainnet. Open a token on BscScan after you create one.</p>
           </div>
         </div>
         <div class="board">
@@ -257,9 +252,9 @@
               </div>
             </div>
             <div style="margin-top:20px">
-              <button class="btn btn-primary" type="submit" id="createSubmit" style="width:100%" data-mode="connect">Connect wallet to launch</button>
+              <button class="btn btn-primary" type="submit" id="createSubmit" style="width:100%" data-mode="connect">Connect Wallet</button>
               <p id="createMsg" class="soft-note" hidden></p>
-              <p class="submit-note">Connect an injected wallet (MetaMask / Rabby / Binance). Launch opens when the protocol ships — no fake txs. Never share a seed phrase.</p>
+              <p class="submit-note">Connect MetaMask / Rabby / Binance Wallet on <strong>BSC Mainnet</strong>. Launch sends a real tx to the Riz.Fun factory (0.001 BNB fee). Never share a seed phrase.</p>
             </div>
           </div>
         </div>
@@ -281,7 +276,7 @@
           <div class="row"><span class="k">Starting mcap</span><span class="mono">~$5,000</span></div>
           <div class="row"><span class="k">Graduate</span><span class="mono">~$35,000</span></div>
           <div class="row"><span class="k">Supply</span><span class="mono">1,000,000,000</span></div>
-          <div class="row"><span class="k">Liquidity</span><span>Locked Uniswap v4 LP (not Pancake)</span></div>
+          <div class="row"><span class="k">Liquidity</span><span>Locked Uniswap v4 LP ()</span></div>
           <div class="fee-box">
             Fee split: <strong>40%</strong> holders (in paired commodity) ·
             <strong>30%</strong> buyback <strong>$RIZ</strong> ·
@@ -298,7 +293,7 @@
       <div class="section-h">
         <div>
           <h2>How it works</h2>
-          <p>Commodity pair → bonding curve → <strong>locked Uniswap v4</strong> pool (not Pancake).</p>
+          <p>Commodity pair → bonding curve → <strong>locked Uniswap v4</strong> pool ().</p>
         </div>
       </div>
       <div class="how">
@@ -315,7 +310,7 @@
         <div class="step">
           <div class="n">03</div>
           <h3>Graduate to locked Uniswap v4</h3>
-          <p>At the endpoint, reserves seed a <strong>Uniswap v4</strong> full-range pool on BSC. Post-grad fees go through the <strong>v4 hook</strong>. LP is locked permanently. Pancake is not the default.</p>
+          <p>At the endpoint, reserves seed a <strong>Uniswap v4</strong> full-range pool on BSC. Post-grad fees go through the <strong>v4 hook</strong>. LP is locked permanently. .</p>
         </div>
       </div>
     </div>
@@ -388,8 +383,11 @@
     </div>
   </div>
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
+<script src="js/deployments.js"></script>
+<script src="js/launch.js"></script>
 <script src="js/wallet.js"></script>
 <script src="js/app.js"></script>
+
 </body>
 </html>

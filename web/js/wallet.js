@@ -5,7 +5,7 @@
   var BSC = {
     chainId: "0x38",
     chainIdDec: 56,
-    chainName: "BNB Smart Chain",
+    chainName: "BSC Mainnet",
     nativeCurrency: { name: "BNB", symbol: "BNB", decimals: 18 },
     rpcUrls: [
       "https://bsc-dataseed.binance.org/",
@@ -304,20 +304,21 @@
     var msg = $("#createMsg");
     if (!submit) return;
     var s = getState();
-    /* Protocol not deployed — never fake a successful launch tx */
-    submit.disabled = true;
+    var ready = global.RizDeployments && global.RizDeployments.isReady();
+    submit.disabled = false;
     if (!s.connected) {
-      submit.textContent = "Connect wallet to launch";
-      submit.disabled = false;
+      submit.textContent = "Connect Wallet";
       submit.dataset.mode = "connect";
     } else if (!s.onBsc) {
-      submit.textContent = "Switch to BNB Smart Chain";
-      submit.disabled = false;
+      submit.textContent = "Switch to BSC Mainnet";
       submit.dataset.mode = "switch";
-    } else {
-      submit.textContent = "Launch opens when protocol ships";
+    } else if (!ready) {
+      submit.textContent = "Factory config missing";
       submit.disabled = true;
-      submit.dataset.mode = "soon";
+      submit.dataset.mode = "blocked";
+    } else {
+      submit.textContent = "Launch on BSC";
+      submit.dataset.mode = "launch";
     }
     if (msg && s.error) {
       msg.textContent = s.error;
@@ -343,8 +344,7 @@
           connect()
             .then(function () {
               if (msg) {
-                msg.textContent =
-                  "Wallet connected. Launch opens when the protocol ships — no fake transactions.";
+                msg.textContent = "Wallet connected on BSC Mainnet.";
                 msg.hidden = false;
               }
               updateCreateUi();
@@ -361,7 +361,7 @@
           ensureBsc()
             .then(function () {
               if (msg) {
-                msg.textContent = "On BNB Smart Chain. Launch opens when the protocol ships.";
+                msg.textContent = "Switched to BSC Mainnet.";
                 msg.hidden = false;
               }
               updateCreateUi();
@@ -374,11 +374,52 @@
             });
           return;
         }
+        if (mode !== "launch") {
+          if (msg) {
+            msg.textContent = "Launch unavailable — factory config missing.";
+            msg.hidden = false;
+          }
+          return;
+        }
+        if (!global.RizLaunch || typeof global.RizLaunch.launchFromForm !== "function") {
+          if (msg) {
+            msg.textContent = "Launch module not loaded.";
+            msg.hidden = false;
+          }
+          return;
+        }
+        submit.disabled = true;
+        submit.textContent = "Confirm in wallet…";
         if (msg) {
-          msg.textContent =
-            "Launch creation opens when the protocol ships. Contracts are not deployed yet — no transaction was sent.";
+          msg.textContent = "Sending launch tx to factory (0.001 BNB fee)…";
           msg.hidden = false;
         }
+        global.RizLaunch.launchFromForm(form)
+          .then(function (entry) {
+            var link = entry.txHash && global.RizDeployments
+              ? global.RizDeployments.txUrl(entry.txHash)
+              : "";
+            if (msg) {
+              msg.innerHTML =
+                "Launched <strong>" +
+                (entry.symbol || "") +
+                "</strong>" +
+                (entry.token ? " · <span class=\"mono\">" + entry.token + "</span>" : "") +
+                (link ? ' · <a href="' + link + '" target="_blank" rel="noopener">BscScan</a>' : "");
+              msg.hidden = false;
+            }
+            if (global.RizApp && typeof global.RizApp.refreshLaunches === "function") {
+              global.RizApp.refreshLaunches();
+            }
+            updateCreateUi();
+          })
+          .catch(function (err) {
+            if (msg) {
+              msg.textContent = (err && err.message) || "Launch failed.";
+              msg.hidden = false;
+            }
+            updateCreateUi();
+          });
       },
       true
     );

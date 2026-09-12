@@ -1,0 +1,26 @@
+{
+  "chainId": 56,
+  "chainName": "BNB Smart Chain",
+  "source": "On-chain reads from factory 0xFd0D4aaA8627646856CB14B1F9356C2f77a7F2ae (owner 0x0e6Cf4AF115b611901fc27D6f95F5bBB82d06792). broadcast/.../56/run-latest.json was not present in repo; addresses below are factory immutables/getters, not invented.",
+  "factory": "0xFd0D4aaA8627646856CB14B1F9356C2f77a7F2ae",
+  "owner": "0x0e6Cf4AF115b611901fc27D6f95F5bBB82d06792",
+  "poolManager": "0x28e2Ea090877bF75740558f6BFB36A5ffeE9e9dF",
+  "positionManager": "0x7A4a5c919aE2541AeD11041A1AEeE68f1287f95b",
+  "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+  "locker": "0xeE51Df76C1f51baa4060753205FC48203c99EC55",
+  "memeHook": "0x103C83812daFC55e27F79B9DBb9101A67ae06044",
+  "feeEscrow": "0x714aeb9409F290882930061c8355aE56bf8A7A48",
+  "buybackVault": "0x61B5EE4D590e43A3c5fd7Fe8C8A6Ff287305D171",
+  "launchDeployer": "0x837618C5450b19b4c56E80351c55BfE2Dd62D329",
+  "graduationExecutor": "0xD1E88DabD2af8e91d32aEE29e4059fCf07799d39",
+  "graduationGuard": "0xdD0930964CC0dAa668D7b5E1ffe44D9a5Ae17317",
+  "launchEnabled": true,
+  "launchFeeWei": "1000000000000000",
+  "defaultLaunchConfigId": 0,
+  "quotes": {
+    "BNB": { "address": "0x0000000000000000000000000000000000000000", "decimals": 18, "approved": true, "note": "native; uses LaunchConfig phantom/threshold" },
+    "XAUt": { "address": "0x21cAef8A43163Eea865baeE23b9C2E327696A3bf", "decimals": 6, "approved": true },
+    "PAXG": { "address": "0x7950865a9140cB519342433146Ed5b40c6F210f7", "decimals": 18, "approved": true }
+  },
+  "explorer": "https://bscscan.com"
+}

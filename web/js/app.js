@@ -380,24 +380,85 @@
     }
   }
 
-  function renderLaunchesEmpty() {
+  function refreshLaunches() {
+    const list =
+      globalThis.RizLaunch && typeof globalThis.RizLaunch.loadLaunches === "function"
+        ? globalThis.RizLaunch.loadLaunches()
+        : [];
     const tbody = $("#launchesBody");
-    if (tbody) {
-      tbody.innerHTML =
-        '<tr><td colspan="5" class="empty-cell">No launches yet</td></tr>';
-    }
     const featured = $("#featuredLaunches");
-    if (featured) {
-      featured.innerHTML =
-        '<div class="empty-state"><p class="empty-title">No launches yet</p><p class="empty-sub">When the protocol ships, new commodity-paired launches will appear here.</p><button type="button" class="btn btn-primary btn-sm" data-goto="create">Create a launch</button></div>';
-      $all("[data-goto]", featured).forEach((el) => {
-        el.addEventListener("click", (e) => {
-          e.preventDefault();
-          const id = el.getAttribute("data-goto");
-          if (id) showView(id);
-        });
-      });
+    const explorer =
+      (globalThis.RizDeployments && globalThis.RizDeployments.DEPLOY.explorer) ||
+      "https://bscscan.com";
+
+    if (tbody) {
+      if (!list.length) {
+        tbody.innerHTML =
+          '<tr><td colspan="5" class="empty-cell">No launches yet — create one on BSC Mainnet</td></tr>';
+      } else {
+        tbody.innerHTML = list
+          .map(function (L) {
+            const token = L.token || "";
+            const short = token ? token.slice(0, 6) + "…" + token.slice(-4) : "pending";
+            const href = token ? explorer + "/address/" + token : L.txHash ? explorer + "/tx/" + L.txHash : "#";
+            return (
+              "<tr>" +
+              "<td><strong>" +
+              (L.symbol || "") +
+              "</strong><div class=\"soft-note\">" +
+              (L.name || "") +
+              "</div></td>" +
+              "<td class=\"mono\">" +
+              (L.quote || "") +
+              "</td>" +
+              '<td class="mono"><a href="' +
+              href +
+              '" target="_blank" rel="noopener">' +
+              short +
+              "</a></td>" +
+              "<td class=\"mono\">live</td>" +
+              "<td>BSC</td>" +
+              "</tr>"
+            );
+          })
+          .join("");
+      }
     }
+
+    if (featured) {
+      if (!list.length) {
+        featured.innerHTML =
+          '<div class="empty-state"><p class="empty-title">No launches yet</p><p class="empty-sub">Launch a coin on BSC Mainnet to see it here.</p></div>';
+      } else {
+        featured.innerHTML = list
+          .slice(0, 6)
+          .map(function (L) {
+            const token = L.token || "";
+            const href = token
+              ? explorer + "/address/" + token
+              : L.txHash
+                ? explorer + "/tx/" + L.txHash
+                : "#";
+            return (
+              '<a class="launch-card" href="' +
+              href +
+              '" target="_blank" rel="noopener">' +
+              "<strong>" +
+              (L.symbol || "TOKEN") +
+              "</strong>" +
+              '<span class="mono">' +
+              (L.quote || "") +
+              " · BSC Mainnet</span>" +
+              "</a>"
+            );
+          })
+          .join("");
+      }
+    }
+  }
+
+  function renderLaunchesEmpty() {
+    refreshLaunches();
   }
 
   function renderCreateQuotes() {
@@ -571,6 +632,13 @@
     renderCreateQuotes();
     updateSummary();
   }
+
+  globalThis.RizApp = {
+    getSelectedQuote: function () {
+      return selectedQuote;
+    },
+    refreshLaunches: refreshLaunches,
+  };
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
