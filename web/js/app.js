@@ -620,6 +620,21 @@
     }
   }
 
+  
+  // Imagine hero: play once, hold last frame (tagline baked in video)
+  (function () {
+    var v = document.getElementById("rizImagine");
+    if (!v) return;
+    v.addEventListener("ended", function () {
+      try {
+        v.pause();
+        if (v.duration && isFinite(v.duration)) {
+          v.currentTime = Math.max(0, v.duration - 0.05);
+        }
+      } catch (e) {}
+    });
+  })();
+
   async function init() {
     setupNav();
     setupCreateForm();
