@@ -766,3 +766,14 @@ footer{padding:36px 0 52px;color:var(--dim);font-size:.82rem;border-top:var(--bo
   .wallet-slot{order:5;width:100%;margin:6px 0 0;justify-content:flex-end}
   .nav-links{justify-content:flex-end}
 }
+
+
+.riz-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:280px}
+.riz-imagine{
+  width:100%;
+  max-width:360px;
+  height:auto;
+  display:block;
+  background:#000;
+  border:0;
+}
